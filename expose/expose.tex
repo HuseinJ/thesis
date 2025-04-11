@@ -1,0 +1,66 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage[backend=biber,style=numeric]{biblatex}
+
+\addbibresource{references.bib}
+
+\geometry{margin=2.5cm}
+\onehalfspacing
+\titleformat{\section}[block]{\bfseries\Large}{\thesection}{1em}{}
+
+\title{Exposé: Title of Thesis ???}
+\author{Husein Jusic \\ Bsc. Informatics \\ Technical University Munich}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+\section{Introduction and Motivation}
+Software architecture design is a critical and challenging phase in the software development life cycle, particularly within larger SaaS Companies where systems are complex and must support extensive scalability requirements. As highlighted by Eisenreich et al. \autocite{eisenreich2024} designing domain models and software architectures is not only time-consuming but also significantly impacts the quality of service delivered by the resulting system. \newline In practice, the architecture design process in enterprise environments is constrained by tight deadlines, limited resources and business pressure which often leads software architects to pick suboptimal solutions: either taking the first viable architecture design without deep exploration of alternatives or creating very simple architectures that satisfy the immediate requirements but without considering long-term quality attributes. This stands in contrast to the ideal approach where multiple architecture candidates would be created, thoroughly evaluated and compared before settling for the most suitable solution. \newline The consequences of hastily constructed software architectures are well-documented in software engineering literature. Suboptimal architectures for example can lead to increased maintenance cost as analyzed by MacCormack et al. \autocite{MACCORMACK2016170}. Specifically for SaaS Companies these consequences can translate to competitive disadvantages as their business model depends on maintaining a robust software foundation. \newline The recent quality advancements of LLMs present promising opportunities to address these challenges. Eisenreich et al. \cite{eisenreich2024} have proposed a vision for semi-automatically generating software architectures using artificial intelligence techniques, particularly LLMs, based on software requirements. Their approach suggests leveraging AI to generate domain models and multiple architecture candidates, followed by a manual evaluation and trade-off analysis of the created architectures. \newline While their vision provides a valuable conceptual framework, its application specifically in large-scale SaaS software environments with lots of requirements remains unexplored. \newline
+This thesis aims to extend Eisenreich's vision by investigating how different LLMs can be utilized specifically in the context of large Saas Software. We will conduct an empirical study with a SaaS Company - FTAPI Software GmbH. By focusing specifically on the domains of large Saas Software and conducting research within an actual enterprise environment, this thesis aims to provide insights into the applicability of AI-Assisted architecture design and the specific considerations required when applying these techniques in larger-scale software development contexts.
+
+\subsection{Study Context: FTAPI Software GmbH}
+Founded in 2010, FTAPI Software GmbH has consistently pursued a clear vision: enabling organizations to maintain complete control over their data exchange—enhancing efficiency, security, and digital sovereignty. Today, approximately 2,000 companies and more than a million active users rely on FTAPI's platform for secure data exchange.
+The company's core software has evolved over the years to accommodate numerous requirements. Currently, a substantial portion of the service consists of a large monolithic structure that has become increasingly difficult to maintain. To ensure future readiness and sustain a reliable, robust software foundation, the development team is continuously working to transform this monolith into a more modular architecture (modulith).
+To accomplish this transformation, developers—alongside their regular tasks of implementing new features and fixing bugs—decompose individual parts of the software where possible into separate domains. Each domain consists of a single module designed to accomplish one clearly defined task. These modules, once separated from each other, become significantly easier to maintain.
+Through this thesis, we aim to investigate how LLMs can be effectively utilized to help software architects design architectures for these modules more efficiently, thereby accelerating FTAPI's architectural evolution toward a more maintainable, modular system.
+
+\section{Research Question and Objectives}
+
+This thesis aims to explore and analyze how LLMs can be utilized in the industry with large requirement sets to help developers with creating and refining software architectures
+
+\begin{itemize}
+    \item How effectively can Large Language Models (LLMs) generate viable software architecture candidates that meet the specific requirements of larger SaaS Company software applications?
+    \item To what extent does the quality of LLM-generated architectures for large requirements sets compare with those created by experienced human architects?
+    \item How do software architects and development teams in the Industrie perceive the utility and trustworthiness of LLM-generated architecture proposals?
+    \item Can we securely verify with prompt engineering that the LLMs generated architectures are complying with a defined structure
+    \item How does the time investment in prompt engineering and LLM guidance compare to the time savings in architecture design?
+    \item What modifications to Eisenreich's methodology are necessary when applying it to large-scale legacy systems undergoing incremental modularization?
+\end{itemize}
+
+
+
+\section{Methodology}
+This research will employ a mixed-methods approach combining qualitative and quantitative techniques to evaluate the effectiveness of LLM-assisted software architecture design at a SaaS Company like FTAPI Software GmbH.
+
+\subsection{Phase 1: Baseline Assessment}
+First, we need to understand how FTAPI currently designs software architecture. We will interview 4-5 software architects to learn about their current design process. Through these interviews, we will document their approaches and challenges. We will also create a set of metrics to measure architecture quality and efficiency. This will give us a baseline to compare against when we test the LLM-assisted methods.
+
+\subsection{Phase 2: LLM Setup and Prompt Engineering}
+In the second phase, we will prepare the AI tools and the inputs they need. We will select several modern LLMs to test, such as GPT-4, Claude 3, and LLaMA-3. We will gather requirements and documentation for 1-2 modules FTAPI wants to separate from their monolith. We will also collect information about one module that has already been separated. Using this information, we will create specialized prompts for each LLM based on FTAPI's requirements and design guidelines.
+
+\subsection{Phase 3: Architecture Generation and Comparative Study}
+Here we will implement Eisenreichs et al. semi automatic architecture generation approach and compare it with the traditional method. Then compare the proposed architecture with already existing architecture doamin models or drafts of new domains and evaluate the aritecture based on the defined quality metrics.
+
+\printbibliography
+
+\end{document}
