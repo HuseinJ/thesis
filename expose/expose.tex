@@ -43,27 +43,18 @@ Through this thesis, we aim to investigate how Large Language Models (LLMs) can 
 
 \section{Research Question and Objectives}
 
-This thesis aims to explore and analyze how LLMs can be utilized in the industry with large requirement sets to help developers with creating and refining software architectures
+This thesis aims to explore and analyze how LLMs can be utilized in the industry with large requirement sets to help developers with creating and refining software architectures with large requirements sets
 
 \begin{itemize}
     \item How effectively can Large Language Models (LLMs) identify and define viable bounded contexts that align with domain-specific requirements in large SaaS applications implementing Domain-Driven Design principles?
-    \item To what extent do bounded contexts and domain models identified by LLMs compare in quality and applicability with those created by experienced DDD practitioners when analyzing complex SaaS application requirements?
+    \item To what extent                                                               zuiudeswo bounded contexts and domain models identified by LLMs compare in quality and applicability with those created by experienced DDD practitioners when analyzing complex SaaS application requirements?
     \item What modifications to Eisenreich's methodology are necessary when applying it to large-scale legacy systems undergoing incremental modularization?
 \end{itemize}
 
 
 
 \section{Methodology}
-This research will employ a mixed-methods approach combining qualitative and quantitative techniques to evaluate the effectiveness of LLM-assisted software architecture design at a SaaS Company like FTAPI Software GmbH.
-
-\subsection{Phase 1: Baseline Assessment}
-First, we need to understand how FTAPI currently identifies and designs bounded contexts within their domain-driven approach. We will observe how the software developers and domain experts identify and define bounded contexts for parts of the software monolith. To supplement these observations, we will analyze existing documentation of previously identified bounded contexts to understand FTAPI's domain model process.
-
-\subsection{Phase 2: LLM Setup and Prompt Engineering}
-In the second phase, we will prepare the AI tools and the inputs they need. We will select several modern LLMs to test, such as GPT-4, Claude 3, and LLaMA-3. We will gather requirements and documentation for 1-2 subdomains FTAPI wants to separate from their monolith. We will also collect information about one bounded context that has already been separated. Using this information, we will create specialized prompts for each LLM based on FTAPI's requirements and design guidelines.
-
-\subsection{Phase 3: Architecture Generation and Comparative Study}
-In this phase, we will adapt Eisenreich et al.'s semi-automatic architecture generation approach to focus specifically on bounded context identification and domain model generation. Using the prompts developed in Phase 2, we will task the selected LLMs with analyzing requirements and proposing bounded contexts along with their internal domain model. These LLM-generated domain models will then be evaluated through structured interviews with professional developers and experienced DDD practitioners at FTAPI. The evaluation will focus on the correctness, completeness, and applicability of the proposed bounded contexts.
+This research will employ a mixed-methods approach combining qualitative and quantitative techniques to evaluate the effectiveness of LLM-assisted software architecture design at a SaaS Company like FTAPI Software GmbH.\\ First, we need to understand how FTAPI currently identifies and designs bounded contexts within their domain-driven approach. We will observe how the software developers and domain experts identify and define bounded contexts for parts of the software monolith. To supplement these observations, we intend to analyze existing documentation of previously identified bounded contexts to understand FTAPI's domain model process. \\ Several modern LLMs will be selected for testing, like GPT-4, Claude 3, and LLaMA-3. I plan to gather requirements and documentation for 1-2 subdomains FTAPI wants to separate from their monolith. Additionally, I am going to use information about one bounded context that has already been successfully separated. Based on these materials, specialized prompts will be developed for the LLMs, tailored to FTAPI's specific requirements and domain design guidelines. Then i shall adapt Eisenreich et al.'s semi-automatic architecture generation approach to focus specifically on bounded context identification and domain model generation. These LLM-generated domain models will then be evaluated through structured interviews with professional developers and experienced DDD practitioners at FTAPI. The evaluation will focus on the correctness, completeness, and applicability of the proposed bounded contexts.
 
 \printbibliography
 
