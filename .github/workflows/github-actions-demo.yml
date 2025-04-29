@@ -13,6 +13,13 @@ jobs:
     - name: Build pdf
       run: cd doc && make pdf
 
+    - name: Verify pdf exists
+      run: |
+        if [ ! -f doc/build/main.pdf ]; then
+          echo "PDF not found at doc/build/main.pdf"
+          exit 1
+        fi
+
     - name: Upload pdf
       uses: actions/upload-artifact@v2
       with:
