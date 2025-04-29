@@ -28,7 +28,7 @@ jobs:
         ls -la doc/build
 
     - name: Upload pdf
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v4
       with:
         name: thesis
         path: doc/build/main.pdf
