@@ -15,10 +15,17 @@ jobs:
 
     - name: Verify pdf exists
       run: |
+        echo "Checking if PDF exists..."
+        ls -la doc/build
         if [ ! -f doc/build/main.pdf ]; then
-          echo "PDF not found at doc/build/main.pdf"
+          echo "Error: PDF not found at doc/build/main.pdf"
           exit 1
         fi
+
+    - name: Debug PDF Generation
+      run: |
+        echo "Debugging PDF Generation..."
+        ls -la doc/build
 
     - name: Upload pdf
       uses: actions/upload-artifact@v2
