@@ -1,0 +1,18 @@
+\chapter{Theoretical Background}\label{chapter:theoreticalbg}
+In this chapter we want to introduce some theorethical concepts which are important for this thesis
+
+\section{Domain Driven Design}\label{sec:ddd}
+Domain Driven Design (DDD) describes a process for software development which was introduced by Eric Evans in his seminal work "Domain-Driven Design: Tackling Complexity in the Heart of Software" \autocite{evans2004domain}. This methodology emphasizes creating software systems that accurately reflect and align with the business domain they serve. DDD is particularly valuable for complex systems with extensive requirements where business logic is continually evolving and changing.
+
+The core philosophy of DDD centers on prioritizing the domain model over technical concerns, enabling software development teams to solve business problems instead of getting entangled in implementation details. This approach typically results in software that is more maintainable and closely aligned with business objectives. Empirical research supports this claim; for example, Özkan et al. \autocite{ddd-maintainability} conducted a case study demonstrating that DDD implementation significantly improved the maintainability metrics of a large-scale commercial software system compared to its previous architecture.
+
+\subsection{Ubiquitous Language}
+One of the core concepts of DDD is the development of a Ubiquitous Language - a shared vocabulary which is consistently used by domain experts and the developers. This shared vocabulary improves communication, mitigates translation errors and improves communication between technical and non-technical stakeholders when discussing the business domain.
+
+\subsection{Domain}
+Evans provides a foundational definition of the term "domain" in his seminal work:
+\begin{quote}
+"Every software program relates to some activity or interest of its user. That subject area to which the user applies the program is the domain of the software."
+\autocite[p.~4]{evans2004domain}
+\end{quote}
+Further he makes it clear that the domain represents more than just a subject area; it encompasses the entire business context within which a software system operates. It includes all the business rules, processes, workflows, terminology, and conceptual models that domain experts use when discussing and working within their field of expertise. Vernon \autocite[p.~17]{vernon2013implementing} further clarifies this by explaining that a domain is "a sphere of knowledge and activity around which the application logic revolves." 
