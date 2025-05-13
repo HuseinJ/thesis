@@ -1,6 +1,18 @@
 \chapter{Study Context: FTAPI Software GmbH}
-chapter about the company, its products, the software etc etc.
+\begin{figure}[H]
+    \centering
+    \includegraphics[height=2cm]{logos/FTAPI-icon.png} 
+    \caption{FTAPI Software GmbH Logo}
+    \label{fig:ftapi-logo} 
+  \end{figure}
+Founded in 2010, FTAPI Software GmbH has consistently pursued a clear vision: enabling organizations to maintain complete control over their data exchange—enhancing efficiency, security, and digital sovereignty. Today, approximately 2,000 companies and more than a million active users rely on FTAPI's platform for secure data exchange.
+
+
 \section{Company and Product Overview}
 \section{Current Monolith Architecture}
+The company's core software has evolved over the years to accommodate numerous requirements. Currently, a substantial portion of the service consists of a large monolithic structure that has become increasingly difficult to maintain. To ensure future readiness and sustain a reliable, robust software foundation, the development team is continuously working to transform this monolith into a more modular architecture (modulith).
+
+To accomplish this transformation, developers—alongside their regular tasks of implementing new features and fixing bugs—decompose individual parts of the software where possible into separate bounded contexts using domain-driven-design (DDD) as presented by Vernon \autocite[p.62]{vernon2013implementing} and explained in Section~\ref{sec:ddd}. Through this thesis, we aim to investigate how Large Language Models (LLMs) can be effectively utilized to accelerate and improve FTAPI's modularization process. Specifically, we will explore how LLMs can assist software architects in identifying potential bounded contexts, defining domain models within those contexts, and establishing appropriate interfaces between them. This assistance has the potential to significantly advance FTAPI's architectural evolution toward a more maintainable, modular system based on sound domain-driven principles.
+
 \section{Modularization Strategy}
 \section{Development Process and Challenges}
