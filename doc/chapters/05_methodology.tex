@@ -1,7 +1,126 @@
 \chapter{Methodology}
 what will be done, how it is planned what steps are taken.
 \section{Research Design}
+This study employs a mixed-methods approach combining observational analysis, experimental implementation, and comparative evaluation. The research is structured as a three-phase methodology designed to address the core research questions regarding the effectiveness of LLM-assisted domain modeling in complex software architecture transitions.
 \section{Phase 1: Observational Baseline Assessment}
+This phase establishes a comprehensive baseline understanding of the existing architectural challenges and development processes within the FTAPI platform transition.
+
+\subsubsection{Current State Analysis}
+The initial assessment involves:
+\begin{itemize}
+    \item \textbf{Architecture Documentation Review}: Analyzing existing system documentation, including architectural decision records, system diagrams, and API specifications
+    \item \textbf{Code Base Analysis}: Examining the monolithic codebase to identify:
+    \begin{itemize}
+        \item Tightly coupled components
+        \item Shared data models across different business functions
+        \item Technical debt hotspots
+        \item Current module boundaries and their effectiveness
+    \end{itemize}
+\end{itemize}
+
+\subsection{Modularization Strategy Documentation}
+Document FTAPI's current approach to transitioning from monolith to modulith:
+\begin{itemize}
+    \item Criteria used for identifying module boundaries
+    \item Success stories (e.g., SecuRooms modularization)
+    \item Failed or challenging modularization attempts
+    \item Resource constraints and timeline pressures
+\end{itemize}
+
 \section{Phase 2: LLM Selection and Prompt Engineering}
+
+\subsection{LLM Model Selection}
+Evaluate and select appropriate LLMs based on:
+\begin{itemize}
+    \item \textbf{Capability Assessment}: Testing models on domain modeling tasks
+    \item \textbf{Context Window Size}: Ensuring sufficient capacity for large requirement sets
+    \item \textbf{Output Consistency}: Evaluating reproducibility of results
+    \item \textbf{Cost-Benefit Analysis}: Balancing performance with operational costs
+\end{itemize}
+
+Models to be evaluated include:
+\begin{itemize}
+    \item GPT-4 (OpenAI)
+    \item Claude 4 (Anthropic)
+    \item Open-source alternatives (e.g., Llama 2, CodeLlama)
+\end{itemize}
+
+\subsection{Prompt Engineering Framework}
+
+Develop a systematic approach to prompt design:
+
+\subsubsection{Initial Prompt Templates}
+Create base prompts for:
+\begin{itemize}
+    \item Bounded context identification
+    \item Domain model extraction
+    \item Ubiquitous language detection
+\end{itemize}
+
+\subsubsection{Iterative Refinement Process}
+\begin{enumerate}
+    \item Test prompts with sample requirements
+    \item Analyze output quality and consistency
+    \item Refine based on domain expert feedback
+    \item Document prompt evolution and rationale
+\end{enumerate}
+
+\subsubsection{Context Injection Strategies}
+\begin{itemize}
+    \item Determine optimal ways to provide system context
+    \item Balance between comprehensive information and token limits
+    \item Develop chunking strategies for large requirement sets
+\end{itemize}
+
 \section{Phase 3: Domain Model Generation}
+
+\subsection{Experimental Setup}
+\subsubsection{Test Case Selection}
+\begin{itemize}
+    \item Identify 2-3 representative modules from FTAPI platform
+    \item Select modules with varying complexity levels
+    \item Ensure coverage of different business domains
+\end{itemize}
+
+\subsubsection{Input Preparation}
+\begin{itemize}
+    \item Compile comprehensive requirement documentation
+    \item Include user stories, acceptance criteria, and business rules
+    \item Prepare existing code snippets and API definitions
+\end{itemize}
+
+\subsection{LLM-Assisted Generation Process}
+
+\subsubsection{Bounded Context Discovery}
+\begin{itemize}
+    \item Feed requirements to LLM with crafted prompts
+    \item Generate multiple candidate bounded contexts
+    \item Document reasoning provided by LLM
+\end{itemize}
+
+\subsubsection{Domain Model Creation}
+For each identified context, generate:
+\begin{itemize}
+    \item Entities and value objects
+    \item Aggregates and aggregate roots
+    \item Domain services
+    \item Repository interfaces
+\end{itemize}
+
+\subsubsection{Ubiquitous Language Extraction}
+\begin{itemize}
+    \item Identify key domain terms
+    \item Create glossaries for each bounded context
+\end{itemize}
+
+\subsection{Manual Baseline Creation}
+
+Parallel to LLM generation, experienced DDD practitioners will:
+\begin{itemize}
+    \item Analyze the same requirements independently
+    \item Create bounded contexts and domain models
+    \item Document their decision-making process
+\end{itemize}
+
 \section{Evaluation Approach}
+tbd.

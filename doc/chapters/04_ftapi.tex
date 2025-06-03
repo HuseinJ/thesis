@@ -9,10 +9,30 @@ Founded in 2010, FTAPI Software GmbH has consistently pursued a clear vision: en
 
 
 \section{Company and Product Overview}
-\section{Current Monolith Architecture}
-The company's core software has evolved over the years to accommodate numerous requirements. Currently, a substantial portion of the service consists of a large monolithic structure that has become increasingly difficult to maintain. To ensure future readiness and sustain a reliable, robust software foundation, the development team is continuously working to transform this monolith into a more modular architecture (modulith).
+FTAPI has created a data exchange platform designed to address the growing need for secure and compliant data transfer in modern organisations. The main platform is called Secutransfer and it serves as an integrated solution for exchanging sensitive and business-critical data across organizational boundaries while maintaining strict security and legal compliance standards, such as GDPR, NIS-2, and TISAX® \cite{ftapi2025}
+
+\subsection{Core Platform Components}
+The platform consists of four interconnected products that can be used individually or as an integrated suite:
+
+\subsubsection{SecuMails - Email Encryption}
+SecuMails enables secure encrypted email communication without requiring complex infrastructure. The solution operates through web browsers or via an Outlook add-in, supporting file transfers up to 100 GB. This addresses common limitations of traditional email systems while ensuring compliance with common legal regulations \cite{ftapi2025}
+
+\subsubsection{SecuRooms - Virtual Data Rooms}\label{sec:securooms}
+SecuRooms provides secure virtual spaces for collaborative data exchange. Files can be uploaded by users in virtual datarooms. The users can use this virtual dataroom either as cloud storage or invite other users to share the files. 
+
+\subsubsection{SecuFlows - Automated Workflows}
+The Secuflows is its own client which can model data workflows.
+
+\subsubsection{SecuForms - Secure Forms}
+Secure web Forms ....
+
+\subsection{Technical Architecture and Security}
+Secupass is utilizing AES-256-bit encryption for end-to-end data protection.. Data transmission is secured through TLS 1.3 protocols, with optional zero-knowledge encryption available for maximum security. \cite{ftapi2025}
+
+\section {Current hurdles}
+The company's core software has evolved over the years to accommodate numerous requirements. The main Software grew over the years with increasing business needs.. some functions scaled over the years with no supporting architecture behind it making parts of it hard to maintain. The biggest issue is current Architecture.
+
+\subsection{Current Monolith Architecture}
+Currently, a substantial portion of the service consists of a large monolithic structure that has become increasingly difficult to maintain. To ensure future readiness and sustain a reliable, robust software foundation, the development team is continuously working to transform this monolith into a more modular architecture (modulith).
 
 To accomplish this transformation, developers—alongside their regular tasks of implementing new features and fixing bugs—decompose individual parts of the software where possible into separate bounded contexts using domain-driven-design (DDD) as presented by Vernon \autocite[p.62]{vernon2013implementing} and explained in Section~\ref{sec:ddd}. Through this thesis, we aim to investigate how Large Language Models (LLMs) can be effectively utilized to accelerate and improve FTAPI's modularization process. Specifically, we will explore how LLMs can assist software architects in identifying potential bounded contexts, defining domain models within those contexts, and establishing appropriate interfaces between them. This assistance has the potential to significantly advance FTAPI's architectural evolution toward a more maintainable, modular system based on sound domain-driven principles.
-
-\section{Modularization Strategy}
-\section{Development Process and Challenges}
