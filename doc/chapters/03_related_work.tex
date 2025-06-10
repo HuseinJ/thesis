@@ -17,8 +17,26 @@ The findings from these studies have significant implications for bounded contex
 
 These insights support the approach taken in this thesis, which focuses on semi-automated bounded context identification that leverages LLM capabilities while maintaining human control and validation throughout the process. The evidence suggests that such hybrid approaches are more likely to succeed in real-world enterprise environments like FTAPI's modularization efforts, where domain expertise and contextual knowledge are critical for successful architectural transformations.
 
-\section{AI-Assisted Software Architecture Design}
-\section{DDD-Based Monolith Decomposition}
+\section{Monolith Decomposition}
+
+The evolution from monolithic to modular architectures represents one of the most significant paradigm shifts in software engineering over the past two decades. Understanding this evolution is crucial for appreciating both the challenges and opportunities in modern system decomposition approaches.
+
+\subsection{The Evolution from Monolith to Modular Architectures}
+Monolithic architectures emerged as the dominant pattern in enterprise software development during the 1990s and early 2000s. During this period, enterprise software was primarily deployed as single, large applications that contained all business logic, data access, and user interface components within a unified codebase. Fowler \autocite{fowler2002patterns} documented how enterprise applications naturally evolved into monolithic structures due to the technological constraints and development practices of this era. 
+
+Over the years, numerous studies have highlighted the constraints and limitations of monolithic architectures as systems evolve and scale. Research has consistently demonstrated that as application size and complexity increase, significant architectural challenges emerge that impact both development efficiency and system maintainability.
+
+Blinowski et al. \autocite{Blinowski2022} empirically demonstrated several critical bottlenecks inherent in monolithic systems. Their study revealed that as monolithic applications grow, "modifying the application's source becomes harder as more and more complex code starts to behave in unexpected ways." The research highlighted how architectural boundaries deteriorate over time, with developers finding it "increasingly harder to keep changes that related to a particular module to only affect this very module." This boundary erosion leads to a cascade effect where "changes in one module may lead to unexpected behavior in other modules and a cascade of errors."
+
+The industry began exploring alternative approaches that could address the scalability, maintainability, and development velocity issues inherent in monolithic systems while preserving some of their operational simplicity. The emergence of modular architectures took several evolutionary paths. Richardson \autocite{richardson2018microservices} identified the modular monolith (modulith) as a pragmatic intermediate approach that maintains the deployment simplicity of monoliths while establishing clear module boundaries and enforcing architectural constraints. This approach allows organizations to achieve better separation of concerns and improved maintainability without the operational complexity of fully distributed systems.
+
+The challenge of identifying optimal module boundaries has led to increased interest in Domain-Driven Design principles, particularly the concept of bounded contexts, as a systematic approach to decomposing monolithic systems. Evans' \autocite{evans2004domain} strategic design patterns provide a framework for identifying natural business boundaries that can serve as the foundation for modular architectures.
+
+\subsection{Decomposition Strategies using Domain Driven Design}
+research gap cant find anything.. :(
+
+\subsection{Monolith decomposition using LLM's}
+research gap cant find anything.. :(
 
 \section{Research Gap??}
 ...There are not many studies using Automated Domain Model Generation \ref{admg} and combinging with ddd where a clear format of the architecture design is given by the framework...
