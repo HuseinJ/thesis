@@ -10,3 +10,7 @@
 *.xml
 *.gz
 *.toc
+full-process
+notes*
+ddd
+ddd*

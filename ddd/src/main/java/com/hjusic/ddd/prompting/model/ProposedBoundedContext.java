@@ -1,11 +1,23 @@
 package com.hjusic.ddd.prompting.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 
-@Data
-@AllArgsConstructor
-public class DomainDesignResponse {
-  private String description;
-  private String plantuml;
+@EqualsAndHashCode(callSuper = true)
+public class ProposedBoundedContext extends BoundedContext {
+
+  public static final String RESPONSE_SCHEMA = """
+{
+  "type": "object",
+  "properties": {
+    "description": { "type": "string" },
+    "plantuml": { "type": "string" }
+  },
+  "required": ["description", "plantuml"],
+  "additionalProperties": false
+}
+""";
+
+  public DrawModelEvent toDrawModelEvent() {
+    return DrawModelEvent.now(getPlantuml(), getDescription(), getGenerationModel());
+  }
 }

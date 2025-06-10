@@ -1,6 +1,24 @@
 \chapter{Related Work}
 Chaper about finding related work, any things that can be derived and are interesting to this thesis etc.
-\section{Automated Domain Model Generation}
+\section{Automated Domain Model Generation}\label{admg}
+Domain modeling represents a time-intensive and expertise-dependent aspect of software engineering that requires deep understanding of both business requirements and technical constraints. In this process, engineers typically convert textual requirements into domain models that accurately represent the problem space and provide a foundation for solving business challenges. The inherent complexity and substantial resource demands of manual domain modeling have motivated researchers to explore automation approaches that could reduce both time investment and dependency on scarce domain expertise. Studies such as Chen et al. \autocite{chen2023automated} and from Saini et al. \autocite{Saini2022} explore the capabilities of Large Language Models to assist during this phase, while simultaneously highlighting the current limitations these models face in fully capturing domain semantics and business logic. 
+
+\subsection{Fully Automated Domain Modeling Approaches}
+
+Chen et al. \autocite{chen2023automated} conducted a comprehensive comparative study using GPT-3.5 and GPT-4 for fully automated domain modeling. Their findings reveal that while LLMs demonstrate impressive domain understanding capabilities, they remain impractical for full automation. Significantly, their research highlighted that LLM-generated domain models exhibit high precision but low recall, meaning that while the generated elements are often correct, many required domain elements are missing from the output. Furthermore, Chen et al. found that LLMs struggle most with identifying relationships between domain concepts compared to classes and attributes, and rarely incorporate established modeling best practices or complex design patterns.
+
+\subsection{Semi-Automated Interactive Approaches}
+
+In contrast to fully automated approaches, Saini et al. \autocite{Saini2022} propose a bot-assisted interactive approach that addresses the need for human expertise in domain modeling. Their work recognizes that domain modeling decisions require contextual knowledge and personal preferences that vary from engineers. Rather than attempting full automation, their approach generates multiple alternative solutions for domain modeling scenarios and learns from user preferences over time through an incremental learning strategy. Saini et al.'s work provides traceability between requirements and generated models, enabling users to understand and validate the AI's modeling decisions. This addresses a critical concern for enterprise adoption where architectural decisions must be explainable. Their approach specifically handles complex domain modeling patterns, which are also relevant to bounded context identification in Domain-Driven Design.
+
+\subsection{Implications for Bounded Context Identification}
+
+The findings from these studies have significant implications for bounded context identification in Domain-Driven Design. The research collectively demonstrates that while LLMs show promise in automated design generation, human expertise and interaction are essential for achieving practical, high-quality results in complex software architecture and modeling tasks. The semi-automatic approaches that combine AI assistance with human expertise appear more effective than fully automated solutions, particularly for enterprise environments where architectural decisions must be both accurate and explainable.
+
+These insights support the approach taken in this thesis, which focuses on semi-automated bounded context identification that leverages LLM capabilities while maintaining human control and validation throughout the process. The evidence suggests that such hybrid approaches are more likely to succeed in real-world enterprise environments like FTAPI's modularization efforts, where domain expertise and contextual knowledge are critical for successful architectural transformations.
+
 \section{AI-Assisted Software Architecture Design}
 \section{DDD-Based Monolith Decomposition}
+
 \section{Research Gap??}
+...There are not many studies using Automated Domain Model Generation \ref{admg} and combinging with ddd where a clear format of the architecture design is given by the framework...

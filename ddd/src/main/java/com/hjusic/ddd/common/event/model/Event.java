@@ -1,4 +1,4 @@
-package com.hjusic.idp.core.event.model;
+package com.hjusic.ddd.common.event.model;
 
 import java.time.Instant;
 import java.util.UUID;
@@ -8,5 +8,7 @@ public interface Event {
 
   Instant getTimestamp();
 
-  String getEventType();
+  default String getEventType() {
+    return this.getClass().getSimpleName();
+  };
 }

@@ -1,10 +1,9 @@
-package com.hjusic.idp.core.event.infrastructure;
+package com.hjusic.ddd.common.event.infrastructure;
 
-import com.hjusic.idp.core.event.model.Event;
+import com.hjusic.ddd.common.event.model.Event;
+import java.util.Optional;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.kafka.core.KafkaTemplate;
-import java.util.Optional;
-import org.springframework.stereotype.Component;
 
 public class DomainEventPublisher {
   private final ApplicationEventPublisher applicationPublisher;
