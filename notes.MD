@@ -37,5 +37,16 @@ https://onlinelibrary.wiley.com/doi/epdf/10.1002/jocb.671
  - Zeitplan anpassen !
  - Präsentationen Anfang und nach Ende -> Präsi vorbereiten -> Colloquium https://www.cs.cit.tum.de/en/se/colloquium/
  - wiss. Arbeiten ? 
+
+ # 11.06.2025
+
+ - präsi design keine vorgabe (tum design, ...) - was has ben done - what is the future plan - slide numbers !! - vorbereiten und schicken
+ - workflow anpassen
+
+ # 18.06.2025
+
+ 
+
+
    
 
