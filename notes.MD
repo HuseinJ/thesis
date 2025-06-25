@@ -45,7 +45,13 @@ https://onlinelibrary.wiley.com/doi/epdf/10.1002/jocb.671
 
  # 18.06.2025
 
- 
+ - präsi durchspielen 10 min cap. 
+
+ # 25.06.25
+
+ - raumnummer ?
+ - anreise zeit ? 
+
 
 
    

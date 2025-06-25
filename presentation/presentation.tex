@@ -62,20 +62,20 @@
 
 % Problem
 \begin{frame}{The Harsh Reality: A Big Ball of Mud}
-\begin{itemize}
-    \item \textbf{Platform:} Secutransfer
-    \item Monolithic codebase, entangled logic
-    \item Hard to scale, harder to understand
-    \item Domain knowledge scattered over lots of Services, Managers, ....
-\end{itemize}
-\end{frame}
-\begin{frame}{The Harsh Reality: A Big Ball of Mud}
     \textbf{Antipattern:}
     \begin{center}
         \includegraphics[width=0.25\textwidth]{./img/BBoM.png} \\
         \vspace{0.3cm}
         \tiny Image generated with \textit{ChatGPT + Sora (OpenAI)}
     \end{center}
+\end{frame}
+\begin{frame}{The Harsh Reality: A Big Ball of Mud}
+\begin{itemize}
+    \item \textbf{Platform:} Secutransfer
+    \item Monolithic codebase, entangled logic
+    \item Hard to scale, harder to understand
+    \item Domain knowledge scattered over lots of Services, Managers, ....
+\end{itemize}
 \end{frame}
 
 % The Plan
@@ -113,23 +113,37 @@
         \item Fully automated generation of domain models? \\
         \textbf{→ Doesn't work well.}
         
-        \item Models are incomplete, inconsistent \textcolor{red}{[ADD REFERENCE]}
-        
-        \item \textbf{Why?} LLMs lack domain context and architectural intuition (WIP:  explain no clear path to follow??)
+        \item Models are often incomplete
+        \item LLM's struggle with identifying relationships between domain concepts
+        \item rarely included modeling best practices or complex design patterns
     \end{itemize}
+    \vspace{0.5cm}
+    \tiny{
+        Based on: K. Chen et al., “Automated Domain Modeling with Large Language Models: A Comparative Study,”
+        \textit{MODELS 2023}, pp. 162–172. doi: 10.1109/MODELS58315.2023.00037.
+    }
 \end{frame}
 
 % Semi-automated
 \begin{frame}{Not Replacing Engineers – Augmenting Them}
-\textbf{Semi-Automated Domain Modeling}:
-\begin{itemize}
-    \item Engineers + LLMs = \textbf{much better results}
-    \item LLMs help with:
+    \textbf{Semi-Automated Domain Modeling with LLM Assistants}:
     \begin{itemize}
-        \item wip: add study results \textcolor{red}{[ADD REFERENCE]}
+        \item Human expert + LLM assistant = \textbf{Better productivity \& quality}
+        \item Recent study shows promising results:
+        \begin{itemize}
+            \item \textcolor{teal}{✓} High precision in suggestions (80\%+ for classes)
+            \item \textcolor{teal}{✓} Users report faster modeling compared to manual approach
+            \item \textcolor{teal}{✓} Works well even with medium-sized LLMs
+            \item \textcolor{orange}{→} Human oversight still essential for accuracy
+        \end{itemize}
+        \item Key insight: \textbf{Assist, don't replace} – LLMs suggest, humans decide
     \end{itemize}
-\end{itemize}
-\end{frame}
+    \vspace{0.3cm}
+    \tiny{
+        Based on: D. Prokop et al., "Enhancing Domain Modeling with Pre-trained Large Language Models: An Automated Assistant for Domain Modelers,"
+        \textit{ER 2024}, LNCS 15238, pp. 235–253, 2025.
+    }
+    \end{frame}
 
 % Industry relevance
 \begin{frame}{Industry Context}
@@ -145,49 +159,6 @@
     \end{itemize}
     
 \end{frame}
-
-% Architecture Flow
-\begin{frame}{From Chaos to Clarity: AI-Guided DDD}
-    \begin{center}
-    \begin{tikzpicture}
-        % Input side
-        \node[draw, rectangle, fill=red!20] (problem) at (0,0) {
-            \begin{tabular}{c}
-                \textbf{Current State}\\
-                \small{Unstructured requirements}\\
-                \small{No domain guidance}\\
-                \small{Generic models}
-            \end{tabular}
-        };
-    
-        % AI Engine
-        \node[draw, rectangle, fill=blue!20, minimum width=3cm] (ai) at (5,0) {
-            \begin{tabular}{c}
-                \textbf{LLM}\\
-                \small{+ DDD Principles}\\
-                \small{+ Domain Context}\\
-                \small{+ Pattern Library}\\
-                \small{+ Prompt Engineering}
-            \end{tabular}
-        };
-    
-        % Output
-        \node[draw, rectangle, fill=green!20] (solution) at (10,0) {
-            \begin{tabular}{c}
-                \textbf{Generated Design}\\
-                \small{Bounded Contexts}\\
-                \small{Domain Models}\\
-            \end{tabular}
-        };
-    
-        % Arrows
-        \draw[->, thick] (problem) -- (ai);
-        \draw[->, thick] (ai) -- (solution);
-    \end{tikzpicture}
-    \end{center}
-    \vspace{0.5cm}
-    \textit{``Don't just throw requirements at AI – teach it to think like a domain expert.''}
-    \end{frame}
 
 \begin{frame}{In Progress: Preparation}
     \begin{itemize}
