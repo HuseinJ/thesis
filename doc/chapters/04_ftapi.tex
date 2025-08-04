@@ -14,25 +14,39 @@ FTAPI has created a data exchange platform designed to address the growing need 
 \subsection{Core Platform Components}
 The platform consists of four interconnected products that can be used individually or as an integrated suite:
 
-\subsubsection{SecuMails - Email Encryption}
+\subsubsection{SecuMails - Email Encryption}\label{sec:secumails}
 SecuMails enables secure encrypted email communication without requiring complex infrastructure. The solution operates through web browsers or via an Outlook add-in, supporting file transfers up to 100 GB. This addresses common limitations of traditional email systems while ensuring compliance with common legal regulations \cite{ftapi2025}
 
 \subsubsection{SecuRooms - Virtual Data Rooms}\label{sec:securooms}
 SecuRooms provides secure virtual spaces for collaborative data exchange. Files can be uploaded by users in virtual datarooms. The users can use this virtual dataroom either as cloud storage or invite other users to share the files. 
 
 \subsubsection{SecuFlows - Automated Workflows}
-The Secuflows is its own client which can model data workflows.
+SecuFlows is a standalone application that enables organizations to model and execute automated data exchange workflows. The solution allows users to define complex multi-step processes for data handling, including automated routing, approval workflows, and compliance checks, streamlining repetitive data exchange operations while maintaining security standards.
 
 \subsubsection{SecuForms - Secure Forms}
-Secure web Forms ....
+SecuForms provides a secure web-based form creation and data collection platform. Organizations can create custom forms for sensitive data collection, ensuring encrypted transmission and storage of submitted information. The solution integrates with the broader FTAPI ecosystem to enable seamless secure data workflows from initial collection through final processing.
 
-\subsection{Technical Architecture and Security}
-Secupass is utilizing AES-256-bit encryption for end-to-end data protection.. Data transmission is secured through TLS 1.3 protocols, with optional zero-knowledge encryption available for maximum security. \cite{ftapi2025}
+\section{Current Architectural Challenges}
 
-\section {Current hurdles}
-The company's core software has evolved over the years to accommodate numerous requirements. The main Software grew over the years with increasing business needs.. some functions scaled over the years with no supporting architecture behind it making parts of it hard to maintain. The biggest issue is current Architecture.
+This section examines FTAPI's current software architecture, highlighting both the challenges posed by legacy monolithic structures and the opportunities presented by successful domain-driven modernization efforts. By analyzing the contrast between the problematic SecuMails monolith and the successfully modularized SecuRooms domain, this section establishes the context for investigating how Large Language Models can assist in architectural transformation processes.
 
-\subsection{Current Monolith Architecture}
-Currently, a substantial portion of the service consists of a large monolithic structure that has become increasingly difficult to maintain. To ensure future readiness and sustain a reliable, robust software foundation, the development team is continuously working to transform this monolith into a more modular architecture (modulith).
+\subsection{Legacy Monolithic Structure}
+Over its operational lifetime, FTAPI's core software platform has undergone continuous expansion to address evolving business requirements and increasing user demands. This organic growth pattern has resulted in the implementation of numerous features without adequate consideration of the underlying architectural implications. The accumulation of such architectural decisions has led to a system where the legacy SecuMails domain—representing the core email encryption business—remains characterized by high coupling, limited modularity, and accumulated technical debt within a monolithic structure.
 
-To accomplish this transformation, developers—alongside their regular tasks of implementing new features and fixing bugs—decompose individual parts of the software where possible into separate bounded contexts using domain-driven-design (DDD) as presented by Vernon \autocite[p.62]{vernon2013implementing} and explained in Section~\ref{sec:ddd}. Through this thesis, we aim to investigate how Large Language Models (LLMs) can be effectively utilized to accelerate and improve FTAPI's modularization process. Specifically, we will explore how LLMs can assist software architects in identifying potential bounded contexts, defining domain models within those contexts, and establishing appropriate interfaces between them. This assistance has the potential to significantly advance FTAPI's architectural evolution toward a more maintainable, modular system based on sound domain-driven principles.
+\subsection{Successful Modularization: SecuRooms}
+FTAPI has already demonstrated successful architectural modernization through the SecuRooms domain (\autoref{sec:securooms}), which has been successfully decoupled using Domain-Driven Design principles into a well-defined bounded context with clear domain boundaries and responsibilities. This transformation involved establishing clear domain boundary definitions that separate virtual data room functionality from other platform components, implementing a dedicated domain model with well-defined entities, value objects, and aggregates, creating isolated data persistence with dedicated database schemas and repositories, and defining clear interfaces for integration with other platform components.
+This existing modularization serves as both a validation of DDD's effectiveness within FTAPI's context and provides a valuable reference point for evaluating AI-assisted domain modeling approaches.
+
+\subsection{The SecuMails Modernization Challenge}
+The current architectural challenge centers on transforming the remaining monolithic SecuMails domain into a similarly modular structure. The SecuMails domain faces complex interdependencies with legacy code components, shared data models across different business functions, technical debt hotspots that complicate clean separation, and resource constraints that limit the time available for manual architectural analysis.
+
+\section{Research Opportunity and Validation Strategy}
+The existing SecuRooms implementation, having been manually designed by experienced DDD practitioners, offers a unique opportunity to validate LLM-generated domain models by comparing AI-produced bounded contexts against the proven, manually-crafted SecuRooms architecture when both are derived from equivalent requirement sets.
+
+\subsection{Validation Approach}
+This research leverages FTAPI's dual-state architecture to establish baseline quality using the manually-designed SecuRooms bounded context as a reference standard, test LLM capabilities by generating bounded contexts for SecuRooms requirements and comparing results, apply the validated approach to the SecuMails domain modernization challenge, and measure practical applicability in a real enterprise environment with complex requirements.
+
+\subsection{Business Impact and Motivation}
+The successful modernization of SecuMails domain architecture will enable improved maintainability through clear separation of concerns, enhanced development velocity with reduced coupling between components, better scalability to accommodate growing user demands, and reduced technical debt supporting long-term platform evolution.
+
+This combination of immediate business need and available validation methodology makes FTAPI an ideal environment for investigating LLM-assisted domain modeling in enterprise contexts.

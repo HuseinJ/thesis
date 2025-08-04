@@ -1,16 +1,222 @@
 \chapter{Implementation}
-Do the parts and document it 
-\section{Phase 1 Implementation: Baseline Assessment}
+This chapter documents the empirical investigation of LLM-assisted bounded context extraction, conducted through a systematic comparison of AI-generated domain models against manually-crafted architectures within FTAPI's software ecosystem.
 
-\subsection{Current Architecture Analysis of the BBoM}
-Understanding the architectural challenges facing FTAPI's modularization efforts required a comprehensive analysis of the existing monolithic codebase, which developers internally refer to as the "Big Ball of Mud" (BBoM). This analysis took place during June 2025 using a combination of static code analysis tools and manual code inspection.
+\section{LLM Configuration and Setup}
 
-\subsubsection{Code Metrics and Structure}
-SonarQube was used to examine the core monolith consisting of approximately 101,800 lines of Java code. The analysis revealed:
+\subsection{Model Selection and Configuration}
+The initial phase focused on evaluating different LLM options for domain modeling tasks. Given the computational resource constraints typical in academic research environments, deploying and running effective open-source models locally proved impractical. Consequently, the evaluation was conducted using commercially available AI chat interfaces, which provided access to state-of-the-art models without requiring extensive computational infrastructure.
 
-\section{LLM Setup and Configuration}
-\section{Prompt Design and Refinement}
-\section{Domain Model Generation Process}
-\section{Case Studies}
-\subsection{Case Study 1: [First Module/Subdomain]}
-\subsection{Case Study 2: [Second Module/Subdomain]}
+\subsubsection{Initial Model Evaluation}
+Three leading LLM platforms were selected for preliminary testing based on their documented capabilities in code analysis and architectural reasoning tasks: Claude Sonnet 4 (Anthropic), GPT-4 (OpenAI), and Gemini (Google). This selection represented the current state-of-the-art in commercially available large language models, each offering distinct approaches to natural language understanding and reasoning.
+
+\subsubsection{Resource Constraints and Practical Considerations}
+The decision to utilize commercial chat interfaces rather than self-hosted open-source alternatives was driven by practical limitations. While open-source models such as LLaMA 2 and CodeLlama were initially considered, the computational requirements for running these models effectively exceeded available hardware resources. The commercial platforms provided consistent access to powerful models without the overhead of infrastructure management, enabling focus on the core research questions rather than technical deployment challenges.
+
+\subsection{Model Performance Comparison and Selection}
+Through systematic testing across representative domain modeling tasks, significant differences emerged between the evaluated models. Google's Gemini demonstrated superior performance for this specific application domain, primarily due to two critical factors: its substantially larger context window capacity and enhanced reliability in maintaining coherence across extensive requirement sets.
+
+The extended context window proved particularly valuable when processing FTAPI's complex requirement documentation, as it enabled the model to maintain awareness of all relevant details throughout the analysis process. Additionally, Gemini exhibited greater consistency in avoiding the omission of requirement elements that other models occasionally overlooked during processing, a critical factor given the completeness requirements inherent in architectural design tasks.
+
+\subsection{Prompt Dependency and Model-Specific Optimization}
+It is important to note that these performance differences likely exhibit strong dependency on the specific prompt engineering approach employed. The observed superiority of Google's Gemini may be attributed not only to its inherent architectural capabilities but also to a more favorable interaction between the model's training characteristics and the particular prompt formulations developed for this research. Different prompt strategies might yield varying relative performance across the evaluated models, suggesting that optimal model selection in LLM-assisted domain modeling requires consideration of both model capabilities and prompt engineering compatibility.
+Based on these evaluation results, Google Gemini was selected as the primary LLM for the subsequent domain modeling experiments, with the expectation that its superior context management capabilities would translate to more comprehensive and reliable architectural analysis within the established prompt framework.
+
+\section{Prompt Engineering Framework}
+
+\subsection{Prompt Development Strategy}
+The prompt engineering approach was designed to simulate the experience of working with a senior Domain-Driven Design specialist in an enterprise environment. Rather than simply requesting architectural outputs, the prompts were structured to create an interactive, questioning-based methodology that mirrors real-world DDD consulting practices. This approach aimed to leverage the LLM's reasoning capabilities by embedding it within a realistic professional context where architectural decisions must be justified and explored thoroughly.
+
+\subsection{Role-Based Prompt Architecture}
+The prompt engineering strategy centers on establishing a comprehensive role-based framework that positions the LLM as a senior Domain-Driven Design specialist with extensive enterprise experience. This approach moves beyond simple instruction-based prompting to create a professional persona that embodies both expertise and critical thinking capabilities essential for architectural analysis.
+
+\subsubsection{Core Role Definition}
+The primary role prompt (see Appendix~\ref{app:role-prompt}) establishes the LLM as a "Senior Domain-Driven Design Specialist \& Architectural Sparring Partner" with over 10 years of enterprise DDD implementation experience. This detailed persona specification serves multiple strategic purposes: it provides contextual grounding for the expected level of architectural sophistication, establishes an interactive rather than passive analytical approach, and creates behavioral expectations for rigorous questioning and assumption challenging.
+
+\subsubsection{Behavioral Guidelines}
+The role definition includes specific behavioral instructions that guide the LLM toward DDD best practices enforcement, collaborative modeling approaches, and active challenging of vague or ambiguous concepts. This behavioral framework ensures consistency in how the model approaches domain modeling tasks across different requirement sets.
+
+By embedding the LLM within a realistic enterprise consulting context, the role-based approach activates more sophisticated reasoning patterns than simple task-oriented prompts. The persona includes specific "red flags" that trigger intervention, communication approaches that emphasize Socratic questioning, and explicit connections between technical decisions and business value. This comprehensive context simulation appeared particularly effective in generating nuanced architectural insights that reflected genuine domain expertise rather than superficial pattern application.
+
+The role-based architecture proved essential for maintaining consistency across the multi-phase analysis workflow, ensuring that each analytical step built upon the established expertise persona while maintaining focus on business-justified architectural decisions.
+
+\subsection{Structured Analysis Workflow}
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.8cm,
+        phase/.style={
+            rectangle, rounded corners=4pt, minimum width=7.2cm,
+            minimum height=1.4cm, text centered, draw=black, font=\small\bfseries, text width=7cm
+        },
+        note/.style={font=\scriptsize\itshape},
+        arrow/.style={thick,->,>=stealth, color=blue!70},
+        feedback/.style={thick,->,>=stealth, dashed, color=gray!60}
+    ]
+    
+    % Title
+    \node[font=\Large\bfseries] at (0, 1.2) {LLM-Assisted DDD Analysis Workflow};
+    
+    % Phases
+    \node (phase1) [phase, fill=blue!10] at (0, 0) {
+        Phase 1: Ubiquitous Language Establishment\\
+        \scriptsize Extract domain vocabulary, define glossary
+    };
+    
+    \node (phase2) [phase, below=of phase1, fill=red!10] {
+        Phase 2: Event Storming Simulation\\
+        \scriptsize Identify events, commands, actors
+    };
+    
+    \node (phase3) [phase, below=of phase2, fill=orange!10] {
+        Phase 3: Bounded Context Identification\\
+        \scriptsize Group concepts into cohesive contexts
+    };
+    
+    \node (phase4) [phase, below=of phase3, fill=purple!10] {
+        Phase 4: Aggregate Design\\
+        \scriptsize Define aggregates, entities, invariants
+    };
+    
+    \node (phase5) [phase, below=of phase4, fill=green!10] {
+        Phase 5: Technical Architecture Mapping\\
+        \scriptsize Design ports, adapters, infrastructure
+    };
+    
+    \node (output) [phase, below=of phase5, fill=gray!10, minimum height=1.5cm, font=\bfseries] {
+        Complete Domain Model\\
+        \scriptsize Bounded Contexts • Aggregates • Architecture
+    };
+    
+    % Arrows between phases
+    \draw [arrow] (phase1.south) -- (phase2.north);
+    \draw [arrow] (phase2.south) -- (phase3.north);
+    \draw [arrow] (phase3.south) -- (phase4.north);
+    \draw [arrow] (phase4.south) -- (phase5.north);
+    \draw [arrow] (phase5.south) -- (output.north);
+    
+    % Side Labels Aligned to Full Diagram Height
+\node[rotate=0, anchor=center, font=\scriptsize, gray] at (-6.5, 0.0) {Requirements Input};
+
+% Dashed Input Arrow pointing to Phase 1
+\draw[->, thick, dashed, gray!70] (-5.0, 0.0) -- (phase1.west);
+    
+    \end{tikzpicture}
+    \caption{Refined Five-Phase LLM-Assisted DDD Analysis Workflow}
+    \label{fig:refined-ddd-workflow}
+    \end{figure}
+
+The prompt framework implements a five-phase analysis workflow, each designed to build upon previous insights while maintaining focus on specific Domain-Driven Design (DDD) aspects. As illustrated in Figure~\ref{fig:refined-ddd-workflow}, this process follows a structured progression from vocabulary definition to technical architecture mapping, culminating in a complete domain model that reflects both business requirements and architectural clarity.
+
+\subsubsection{Phase 1: Ubiquitous Language Establishment}
+The initial phase systematically extracts and defines the core domain vocabulary from requirement specifications through a structured glossary approach (see Appendix~\ref{app:ubiquitous-language-prompt}). This foundational step ensures all subsequent analysis operates within a consistent linguistic framework, identifying key business terms, their definitions, contextual usage, and potential ambiguities. The prompt guides the LLM through comprehensive analysis of nouns, verbs, and business concepts while emphasizing business-focused rather than technical definitions. The structured table format captures term definitions, business context, related concepts, and clarification needs, establishing the vocabulary foundation for all architectural decisions.
+
+\subsubsection{Phase 2: Event Storming Simulation}
+Building directly upon the established vocabulary, this phase identifies the temporal flow and dynamic behaviors within the system (see Appendix~\ref{app:event-storming-prompt}). The prompt guides the LLM through systematic identification of domain events in chronological order, mapping each event to its triggering commands, responsible actors, applicable policies, and handling aggregates. This phase transforms static vocabulary into dynamic process understanding, revealing the business workflows and state transitions that drive architectural requirements.
+
+\subsubsection{Phase 3: Bounded Context Identification}
+The bounded context mapping phase leverages the established vocabulary and process understanding to identify natural boundaries within the domain (see Appendix~\ref{app:bounded-context-prompt}). The prompt directs the LLM to group related terms from the glossary into cohesive contexts, defining each context's core purpose, key aggregates, and context-specific language variations. This phase establishes the high-level architectural boundaries that will guide detailed design decisions.
+
+\subsubsection{Phase 4: Aggregate Design}
+Within each identified bounded context, this phase focuses on detailed structural design ensuring proper encapsulation and consistency management (see Appendix~\ref{app:aggregate-design-prompt}). The prompt guides the LLM through identification of aggregate roots, definition of consistency boundaries, specification of contained entities and value objects, and articulation of business invariants. This phase translates conceptual boundaries into concrete structural components.
+
+\subsubsection{Phase 5: Technical Architecture Mapping}
+The technical architecture phase translates domain insights into implementable architectural patterns following hexagonal architecture principles (see Appendix~\ref{app:technical-architecture-prompt}). This phase ensures clean separation between domain logic and technical infrastructure while maintaining traceability to business requirements.
+
+\subsubsection{Workflow Integration and Dependencies}
+Each phase explicitly builds upon the outputs of the previous ones, creating a cohesive analytical progression from vocabulary definition to detailed implementation guidance. Importantly, each phase is approached as an iterative dialogue with the LLM, allowing for continuous refinement through interactive questioning and clarification until a satisfactory result is achieved. This structured yet flexible process helps prevent common issues such as premature technical decisions or incomplete domain understanding, while ensuring thorough coverage of all relevant DDD architectural concerns.
+
+\section{Requirements Gathering and Preparation}
+
+\subsection{Source Documentation Analysis}
+Requirements for both SecuRooms and SecuMails domains were systematically extracted from FTAPI's existing product documentation. This comprehensive approach ensured that the LLM analysis would be based on the same foundational information used in the original development processes, drawing from product specifications, user stories, technical documentation, and business process descriptions.
+
+\subsection{Requirements Compilation Strategy}
+SecuRooms represents a smaller domain compared to SecuMails, but provides an ideal validation case since it has already been successfully modularized using manual DDD practices. This existing architecture serves as the benchmark against which LLM-generated models can be evaluated. The SecuMails domain requirements represent the primary target for architectural modernization, encompassing the core email functionality that remains in monolithic form.
+
+\subsection{Input Preparation Strategy}
+For both domains, all gathered requirements were consolidated into structured text documents optimized for LLM processing. Requirements were formatted as plain text documents, with each domain's requirements organized in a single file ready for direct input into the AI system. This approach enabled seamless progression through the five-phase analysis workflow while allowing the LLM to maintain context across all phases and build progressively more detailed architectural insights
+
+\section{Architecture Generation Process}
+\subsection{LLM-Assisted Domain Model Creation}
+Using the prepared requirements documents, both SecuRooms and SecuMails domains were systematically processed through the established five-phase workflow. The analysis generated comprehensive architectural candidates for each domain, with multiple iterations performed where necessary to refine and clarify the resulting domain models.
+
+\subsection{Architecture Candidate Documentation}
+The LLM-generated outputs from each phase were systematically captured and consolidated into structured architectural candidates. These candidates included complete bounded context definitions, aggregate specifications, entity relationships, and technical architecture mappings. For SecuRooms, this process produced architectural proposals that could be directly compared against the existing manually-designed implementation.
+
+\subsection{Output Validation and Refinement}
+Each generated architecture candidate underwent internal validation to ensure completeness and internal consistency. Where ambiguities or gaps were identified in the initial outputs, additional iterations through relevant workflow phases were conducted to achieve satisfactory architectural coverage.
+
+\section{Expert Evaluation Preparation}
+
+\subsection{Interview Design and Structure}
+The expert evaluation was designed around the core research questions. The interview structure incorporated both quantitative scoring and qualitative feedback to capture comprehensive insights.
+
+Given that SecuRooms already has a manually-designed DDD implementation, the interviews were structured to evaluate both domains differently. For SecuRooms, experts could directly compare LLM outputs against the existing proven architecture. For SecuMails, experts assessed the LLM proposals on their own merits as potential modernization strategies.
+
+\subsection{Interview Structure and Evaluation Criteria}
+\label{sec:interview_structure}
+
+The expert evaluation was designed as a semi-structured interview to systematically gather quantitative scores and rich qualitative feedback on the LLM-generated architectural artifacts. The structure was bifurcated to address the distinct evaluation goals for the SecuRooms (validation against a known baseline) and SecuMails (exploratory modernization) domains, ensuring the feedback was contextualized and directly relevant to the research questions~.
+
+\subsubsection{Interview Phases and Core Questions}
+\label{sec:interview_phases}
+
+The interview was structured into four distinct phases:
+
+\paragraph{Phase 1: Introduction and Goal Alignment (5 minutes)}
+The objective of this phase was to brief the expert on the purpose of the study.
+\begin{itemize}
+    \item \textbf{Introduction:} A brief overview of the thesis goal: to evaluate the effectiveness of LLMs in identifying bounded contexts from complex enterprise requirements.
+    \item \textbf{Context:} Explanation of the two cases: SecuRooms as a validation case against a known benchmark, and SecuMails as an exploratory case for a monolithic modernization challenge.
+    \item \textbf{Task:} Clarification that the expert's role is to critique the AI-generated models based on their deep domain knowledge and experience with Domain-Driven Design.
+\end{itemize}
+
+\paragraph{Phase 2: Comparative Evaluation of SecuRooms (20 minutes)}
+This phase focused on directly comparing the LLM-generated model against the existing, human-designed architecture for SecuRooms.
+
+\begin{itemize}
+    \item \textbf{Quantitative Scoring} (\textit{Scale 1-5, where 1=Very Poorly, 5=Very Well}):
+    \begin{enumerate}
+        \item \textbf{Boundary Alignment:} How accurately do the LLM-identified bounded contexts match the boundaries of the manually designed SecuRooms implementation?
+        \item \textbf{Ubiquitous Language Fidelity:} How well does the LLM's extracted glossary reflect the actual language used within the SecuRooms domain?
+        \item \textbf{Aggregate Correctness:} How correct is the LLM's aggregate design (e.g., aggregate roots, consistency boundaries) when compared to the existing model?
+    \end{enumerate}
+    \item \textbf{Qualitative Probing Questions:}
+    \begin{itemize}
+        \item "What were the most significant or surprising differences between the LLM's proposed boundaries and our current architecture?"
+        \item "Did the LLM identify any alternative groupings or potential improvements that we missed during the manual design? Conversely, what critical elements did it completely omit?"
+        \item "The LLM was prompted to act as a 'Senior DDD Specialist'. Did its reasoning, for instance in defining aggregates and their invariants, reflect this persona?"
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Phase 3: Standalone Evaluation of SecuMails (20 minutes)}
+This phase assessed the LLM-generated architecture for SecuMails on its own merits as a viable modernization strategy.
+
+\begin{itemize}
+    \item \textbf{Quantitative Scoring} (\textit{Scale 1-5, where 1=Very Poorly, 5=Very Well}):
+    \begin{enumerate}
+        \item \textbf{Bounded Context Clarity:} How clear, cohesive, and logically separated are the proposed bounded contexts for the SecuMails domain?
+        \item \textbf{Business Alignment:} How well do the proposed contexts and their responsibilities align with the actual business capabilities of SecuMails?
+        \item \textbf{Technical Feasibility:} How technically sound and implementable is the proposed architecture for transforming the SecuMails monolith?
+    \end{enumerate}
+    \item \textbf{Qualitative Probing Questions:}
+    \begin{itemize}
+        \item "Based on your understanding of the SecuMails monolithic challenges, does this AI-proposed architecture represent a plausible and effective path forward? Why or why not?"
+        \item "What are the biggest strengths and weaknesses of this proposed decomposition?"
+        \item "If you were tasked with modernizing SecuMails, would you consider this LLM output a useful starting point? What would you change, and what would you keep?"
+    \end{itemize}
+\end{itemize}
+
+\paragraph{Phase 4: Overall Impressions and Conclusion (10 minutes)}
+This final phase captured the experts' holistic views on the practical implications of this technology.
+
+\begin{itemize}
+    \item \textbf{Discussion Questions:}
+    \begin{itemize}
+        \item "Overall, how would you describe the utility of the LLM as an 'architectural sparring partner' in the domain modeling process?"
+        \item "To what extent could this approach accelerate or improve the quality of architectural design at FTAPI, especially considering constraints like tight deadlines and business pressure?"
+        \item "What are the most significant limitations or risks you foresee in relying on LLMs for these critical design tasks?"
+        \item "Do you have any final recommendations for how this methodology could be improved or applied in the future?"
+    \end{itemize}
+\end{itemize}
