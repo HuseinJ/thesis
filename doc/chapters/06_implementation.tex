@@ -150,21 +150,16 @@ Each generated architecture candidate underwent internal validation to ensure co
 \section{Expert Evaluation Preparation}
 
 \subsection{Interview Design and Structure}
-The expert evaluation was designed around the core research questions. The interview structure incorporated both quantitative scoring and qualitative feedback to capture comprehensive insights.
+The expert evaluation was designed around the core research questions. The interview structure incorporated qualitative feedback to capture comprehensive insights.
 
 Given that SecuRooms already has a manually-designed DDD implementation, the interviews were structured to evaluate both domains differently. For SecuRooms, experts could directly compare LLM outputs against the existing proven architecture. For SecuMails, experts assessed the LLM proposals on their own merits as potential modernization strategies.
-
-\subsection{Interview Structure and Evaluation Criteria}
-\label{sec:interview_structure}
-
-The expert evaluation was designed as a semi-structured interview to systematically gather quantitative scores and rich qualitative feedback on the LLM-generated architectural artifacts. The structure was bifurcated to address the distinct evaluation goals for the SecuRooms (validation against a known baseline) and SecuMails (exploratory modernization) domains, ensuring the feedback was contextualized and directly relevant to the research questions~.
 
 \subsubsection{Interview Phases and Core Questions}
 \label{sec:interview_phases}
 
-The interview was structured into four distinct phases:
+The interview was structured into four parts and the following questions were prepared for the interview to guide throughout
 
-\paragraph{Phase 1: Introduction and Goal Alignment (5 minutes)}
+\paragraph{Part 1: Introduction and Goal Alignment (5 minutes)}
 The objective of this phase was to brief the expert on the purpose of the study.
 \begin{itemize}
     \item \textbf{Introduction:} A brief overview of the thesis goal: to evaluate the effectiveness of LLMs in identifying bounded contexts from complex enterprise requirements.
@@ -172,44 +167,33 @@ The objective of this phase was to brief the expert on the purpose of the study.
     \item \textbf{Task:} Clarification that the expert's role is to critique the AI-generated models based on their deep domain knowledge and experience with Domain-Driven Design.
 \end{itemize}
 
-\paragraph{Phase 2: Comparative Evaluation of SecuRooms (20 minutes)}
-This phase focused on directly comparing the LLM-generated model against the existing, human-designed architecture for SecuRooms.
+\paragraph{Part 2: Comparative Evaluation of SecuRooms (20 minutes)}
+This part focused on directly comparing the LLM-generated model against the existing, human-designed architecture for SecuRooms.
 
 \begin{itemize}
-    \item \textbf{Quantitative Scoring} (\textit{Scale 1-5, where 1=Very Poorly, 5=Very Well}):
-    \begin{enumerate}
-        \item \textbf{Boundary Alignment:} How accurately do the LLM-identified bounded contexts match the boundaries of the manually designed SecuRooms implementation?
-        \item \textbf{Ubiquitous Language Fidelity:} How well does the LLM's extracted glossary reflect the actual language used within the SecuRooms domain?
-        \item \textbf{Aggregate Correctness:} How correct is the LLM's aggregate design (e.g., aggregate roots, consistency boundaries) when compared to the existing model?
-    \end{enumerate}
     \item \textbf{Qualitative Probing Questions:}
     \begin{itemize}
-        \item "What were the most significant or surprising differences between the LLM's proposed boundaries and our current architecture?"
+        \item "Does the extracted Ubiquitous language represent the real language used for securooms"
+        \item "Do the extracted events represent all the events what in the Securooms domain happen? Do you mis anything here ?"
         \item "Did the LLM identify any alternative groupings or potential improvements that we missed during the manual design? Conversely, what critical elements did it completely omit?"
-        \item "The LLM was prompted to act as a 'Senior DDD Specialist'. Did its reasoning, for instance in defining aggregates and their invariants, reflect this persona?"
+        \item "Do you think the extracted Aggregates represent the real core aggregates we currently have?"
     \end{itemize}
 \end{itemize}
 
 \paragraph{Phase 3: Standalone Evaluation of SecuMails (20 minutes)}
-This phase assessed the LLM-generated architecture for SecuMails on its own merits as a viable modernization strategy.
+This part was conceptualized to assess the LLM-generated architecture for SecuMails on its own merits as a viable modernization strategy.
 
 \begin{itemize}
-    \item \textbf{Quantitative Scoring} (\textit{Scale 1-5, where 1=Very Poorly, 5=Very Well}):
-    \begin{enumerate}
-        \item \textbf{Bounded Context Clarity:} How clear, cohesive, and logically separated are the proposed bounded contexts for the SecuMails domain?
-        \item \textbf{Business Alignment:} How well do the proposed contexts and their responsibilities align with the actual business capabilities of SecuMails?
-        \item \textbf{Technical Feasibility:} How technically sound and implementable is the proposed architecture for transforming the SecuMails monolith?
-    \end{enumerate}
     \item \textbf{Qualitative Probing Questions:}
     \begin{itemize}
         \item "Based on your understanding of the SecuMails monolithic challenges, does this AI-proposed architecture represent a plausible and effective path forward? Why or why not?"
-        \item "What are the biggest strengths and weaknesses of this proposed decomposition?"
         \item "If you were tasked with modernizing SecuMails, would you consider this LLM output a useful starting point? What would you change, and what would you keep?"
+        \item "Would this proposal be helpful to you as the architect who is tasked with defining a modernized architecture"
     \end{itemize}
 \end{itemize}
 
 \paragraph{Phase 4: Overall Impressions and Conclusion (10 minutes)}
-This final phase captured the experts' holistic views on the practical implications of this technology.
+This final part should capture the experts' holistic views on the practical implications of this technology.
 
 \begin{itemize}
     \item \textbf{Discussion Questions:}
@@ -220,3 +204,6 @@ This final phase captured the experts' holistic views on the practical implicati
         \item "Do you have any final recommendations for how this methodology could be improved or applied in the future?"
     \end{itemize}
 \end{itemize}
+
+\subsection{Expert Evaluation Execution}
+Following the prepared design, a series of semi-structured interviews were conducted with 3 experts from FTAPI Software GmbH. The participants included one tech lead and wwo senior Developers, each with extensive experience in the company's domain and the principles of Domain-Driven Design. The interviews were conducted via video conference, lasted approximately 50min each, and were recorded and transcribed for analysis. The gathered qualitative data was then thematically analyzed to identify recurring patterns, points of consensus, and divergent opinions regarding the LLM-generated architectural models.

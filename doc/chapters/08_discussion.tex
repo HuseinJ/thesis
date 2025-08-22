@@ -1,5 +1,116 @@
 \chapter{Discussion}
-critical discussion about finding, research questions etc?
-\section{Impact on Domain Modeling Process}
-\section{Strengths and Limitations}
-\section{Implications for Practice}
+
+This chapter synthesizes the empirical findings from our investigation of LLM-assisted domain modeling, interpreting the results through the lens of both theoretical frameworks and practical applications. We examine how Large Language Models perform in bounded context extraction tasks, compare their outputs with human-designed architectures, and explore the implications for software architecture practice. The discussion integrates insights from expert evaluations, direct observations, and comparative analyses to provide a comprehensive assessment of this emerging methodology.
+
+\section{Synthesis of Research Findings}
+
+\subsection{Effectiveness of LLM-Assisted Bounded Context Identification}
+
+\textbf{Research Question 1:} \textit{How effectively can Large Language Models identify and define viable bounded contexts that align with complex domain-specific requirements?}
+
+The empirical evidence demonstrates that LLMs exhibit substantial capability in identifying viable bounded contexts, particularly when operating within a structured, iterative framework.
+
+\subsubsection{Performance in Well-Scoped Domains}
+In the SecuRooms case, which had clear requirements and well-defined functionality, the LLM-generated contexts matched the existing production architecture very closely. The models were able to highlight the main domain concepts and drew boundaries that looked almost identical to those made by experienced developers.
+
+One expert noted that Claude's results (see Figure~\ref{fig:claude-securooms}) were very close to the real system in production. Interestingly, the LLM also pointed out areas for potential improvement that hadn't been formally addressed before. For example, it suggested treating encryption as its own core domain. An expert commented: \textit{“It's interesting that the encryption context came out as a separate domain. You could see it that way, since it's encapsulated in the frontend and already somewhat distinct, but it hasn't really been developed as a full domain yet.”} This shows that the LLM was able to surface architectural patterns that were only implicit in the current system.
+
+However, not everything was straightforward. Experts debated the suggested split between SecuRoom and Access Control (see Figure~\ref{fig:context-separation}). While the separation made sense in theory, they doubted its practicality because of the strong dependencies between the two. This illustrates an important point: LLMs are good at proposing clean, theory-based boundaries, but human architects still need to weigh those ideas against practical issues like coupling and communication overhead between modules.
+
+\subsubsection{Challenges in Complex Monolithic Domains}
+The SecuMails case was much harder. This domain has a large legacy codebase with many tangled dependencies. While the LLM was able to suggest reasonable ways to break the monolith into smaller contexts, experts found that the proposals missed some key aspects. The model overlooked hidden business rules buried in the code, cross-cutting features that affect multiple parts of the system, and practical constraints that shaped the architecture over years of real-world use.
+
+Experts agreed that the LLM's suggestions could be a good starting point for modernizing SecuMails, but they also stressed that such output cannot replace the deep domain knowledge of experienced engineers. In short: LLMs can help outline possible decompositions, but when it comes to legacy systems, human expertise is still essential to handle historical and technical complexities.
+
+\subsection{Comparative Analysis: AI-Generated versus Human-Designed Models}
+
+\textbf{Research Question 2:} \textit{To what extent do bounded contexts and domain models identified by LLMs compare in quality and applicability with those created by experienced DDD practitioners?}
+
+\subsubsection{Alignment and Divergence Patterns}
+The comparison between LLM-generated results and human-designed architectures shows both strong overlaps and clear differences. In the SecuRooms domain, experts agreed that the LLM's main architectural choices were very close to the real system. However, one difference stood out: the LLM often suggested splitting the system into smaller, more fine-grained contexts than the ones chosen by human architects. 
+
+This became especially clear in the discussion about separating Access Control from SecuRooms. One expert commented: \textit{"I'm just thinking about what would be the point of dividing it up... it definitely depends on each other."} This highlights a key difference in perspective: LLMs tend to optimize for theoretical clarity and separation of concerns, while human architects also consider practical factors such as coupling and operational overhead. In other words, the LLM's ideas were sound in theory but sometimes less realistic for long-term maintainability.
+
+\subsubsection{Novel Architectural Insights}
+Even with these differences, the LLMs added value by suggesting fresh perspectives that challenged existing assumptions. A striking example was the treatment of encryption. One expert reflected: \textit{"I found it interesting [the idea] with the encryption context, that it is branched out in its own domain ... it is somehow already a domain, but not yet worked out enough..."} 
+
+They continued by noting: \textit{"... it is not really set up as a domain. I think it's just different utility classes that do encryption ... But I wouldn't do that from the start."} This shows that the LLM identified a potential new domain boundary that had not been considered before. 
+
+This insight sparked meaningful discussion in the interview about possible future refactoring. While encryption is currently spread across the system for practical reasons, the LLM's proposal highlighted an opportunity to improve separation of concerns. Importantly, this idea was consistently suggested across different models (Claude, Gemini, GPT), which supports its validity as a real architectural improvement rather than a random output.
+
+\section{Process Analysis and Methodological Insights}
+
+\subsection{The Five-Phase Workflow: A Critical Evaluation}
+
+\subsubsection{Phase 1: Ubiquitous Language Extraction}
+The first phase, extracting ubiquitous language, set the foundation for the entire workflow. By engaging in an interactive dialogue, both the human architect and the LLM were required to make domain terminology explicit. This mirrors a core principle of DDD: building a shared vocabulary as the basis for modeling.  
+
+To validate the usefulness of the extracted language, experts were asked whether the proposed terms matched the real language used within the SecuRooms team. One expert stressed the importance of this exercise, remarking: \textit{"So, to use the domain context with the LLM as a context."} Another emphasized how the process clarified terminology that often remains vague in practice: \textit{"...because we often use the same terms for the same concepts"}.  
+
+The interviews highlighted that this step helped surface both strengths and weaknesses of the LLM's language extraction. Expert A noted: \textit{"Yes, in general the terms matched, but some were too generic and would need refinement by the team."} Similarly, Expert B observed that while the LLM captured many of the right words, it occasionally missed domain-specific nuances: \textit{"Some of the terms are correct, but others feel a bit artificial compared to how we usually talk."}  
+
+Overall, Phase 1 proved valuable not only for aligning LLM outputs with domain reality, but also for sparking useful reflection by the experts. The process of explicitly validating and refining terms created a shared understanding—addressing a common challenge in software projects, where terminology is often inconsistent or only implicitly understood. 
+
+\subsubsection{Phase 2: Event Storming Simulation}
+The event storming phase acted as a crucial checkpoint for validating the LLM's understanding of domain behavior. Experts were asked to reflect on the extracted events with the guiding question: \textit{"Do the extracted events represent all the events that happen in the SecuRooms domain? Do you miss anything here?"} This prompted them to evaluate the completeness and accuracy of the identified events.  
+
+The evaluations revealed a mixed picture. On the positive side, experts agreed that the LLM captured the core business events that define the SecuRooms workflows. However, they also pointed out gaps, especially in the coverage of edge cases and technical events that arise in everyday implementation. As one expert explained, some of the missing details were events that “we deal with constantly in operations, but which may not show up in the main business description.”  
+
+Importantly, the interactive setup of the event storming exercise allowed these gaps to be surfaced. One expert highlighted the usefulness of the LLM's role-playing approach: \textit{"Then you take the whole thing with different prompts. The LLM has a role. The role ... is supposed to ask reasonable questions to go through the individual steps."} By engaging in this questioning, the process uncovered events that might otherwise have been missed in a static or purely automated analysis.  
+
+Overall, Phase 2 demonstrated that while LLMs can provide a solid baseline of domain events, human expertise remains essential for capturing nuanced operational details. The structured nature of the simulation gave confidence in the correctness of the main workflows, while the expert review ensured that overlooked or implicit events were also considered. 
+
+\subsubsection{Phase 3--5: Context Definition to Technical Architecture}
+The final phases, moving from defining context boundaries to identifying aggregates and mapping them onto technical architecture, revealed both strengths and important limitations of the LLM approach.  
+
+The LLM was effective at identifying theoretically valid boundaries, but often failed to consider the practical dependencies and tight coupling that shape real-world architectures. The exercise nonetheless proved valuable by prompting deeper reflection among the experts about where boundaries exist and how they might be refined.  
+
+When it came to aggregate identification, experts were asked: \textit{"Do you think the extracted aggregates represent the real core aggregates we currently have?"} The feedback was mixed. While some proposed aggregates aligned with the existing system, others missed the nuanced design choices that had been made over years of development. As one expert noted in the interviews, the aggregates often lacked the contextual detail and depth necessary to reflect the “real” core of the domain. This suggests that aggregate design is an area where current LLMs still fall short, as it requires deep, experience-based domain knowledge that cannot be inferred from requirements alone.  
+
+Overall, Phases 3--5 showed that LLMs can provide useful starting points for boundary definition and architectural exploration, but their outputs should be seen as conversation starters rather than final designs. Human expertise remains crucial to balance theoretical separation with practical constraints, and to ensure that aggregate design reflects not only domain concepts but also the accumulated knowledge of the system's evolution.
+
+\subsection{Proposal for improvement}
+
+
+\section{Strengths and Limitations of the Approach}
+
+\subsection{Key Strengths}
+
+\subsubsection{Acceleration of Initial Design}
+One of the clearest strengths was the speed of getting started. The LLMs were able to quickly generate different architectural candidates, which experts found very valuable. This fast exploration helped kick off discussions that would normally take much longer if done manually.
+
+\subsubsection{Systematic Coverage}
+Another strength was the structured and systematic way the LLMs approached the problem. For example, during ubiquitous language extraction, experts could directly check whether \textit{"the extracted Ubiquitous language represent the real language used for SecuRooms."} This gave them a reliable baseline and made assumptions explicit, which is often missing in early design phases.
+
+\subsubsection{Unbiased Perspective}
+Experts also valued the fresh, unbiased perspective of the LLMs. A good example was the suggestion to treat encryption as its own bounded context. While this was \textit{"not really set up as a domain"} in the current system, it was recognized as \textit{"interesting"} and sparked discussions about possible future refactoring opportunities. This shows how the LLM can uncover ideas that might otherwise be overlooked.
+
+\subsection{Critical Limitations}
+
+\subsubsection{Contextual Understanding Gaps}
+At the same time, the LLMs showed clear weaknesses. Experts pointed out that the models lacked contextual understanding of why the current architecture looks the way it does. For instance, the decision not to model Access Control as its own context was shaped by historical and practical reasons, which the LLM could not infer from requirements ant the questioning alone.
+
+\subsubsection{Practical Coupling Considerations}
+The LLM also struggled to recognize tight dependencies. These couplings are obvious to experienced practitioners but were sometimes ignored in the LLM's proposals.
+
+\section{Future Research Directions}
+
+WIP: ???
+
+\section{Conclusion}
+
+This thesis set out to explore how Large Language Models (LLMs) can support the identification of bounded contexts in the context of Domain-Driven Design (DDD), using the case of FTAPI Software GmbH as a real-world example. The guiding research questions focused on how effectively LLMs can define viable bounded contexts and how their results compare to those of experienced human practitioners.  
+
+The study shows that LLMs are indeed capable of providing valuable support in the early stages of domain modeling. In the SecuRooms domain, which had well-defined requirements and a modular architecture already in place, the LLMs produced results that closely matched the existing production design. They successfully identified core concepts, suggested meaningful boundaries, and even highlighted new perspectives such as the potential treatment of encryption as a standalone domain. These findings demonstrate that LLMs can accelerate initial exploration and provide systematic, unbiased viewpoints that might otherwise be overlooked.  
+
+At the same time, the investigation revealed important limitations. In more complex and entangled domains such as SecuMails, the LLMs struggled to capture the deep contextual knowledge required to fully understand implicit business rules, technical debt, and practical coupling between components. Experts repeatedly emphasized that while the models proposed theoretically valid separations, they often missed the historical and organizational reasons behind the current architecture. This shows that LLMs cannot replace human expertise but instead complement it.  
+
+The expert evaluations consistently described the most effective role of LLMs as that of a \textit{"sparring partner"}. Rather than delivering final answers, the LLMs contributed by making assumptions explicit, providing alternative perspectives, and generating multiple design options in a short amount of time. Human architects then brought in their contextual understanding to refine, adapt, or sometimes reject these suggestions. This collaborative model—where AI provides structure and inspiration while humans provide judgment and experience—proved to be the most productive way of working.
+
+From a practical perspective, this thesis demonstrates how AI-assisted modeling can be integrated into real-world software engineering practice. For FTAPI, the approach offered new ways to think about modularizing the SecuMails monolith and validated the strengths of the already modularized SecuRooms domain. More broadly, the study shows how companies can use LLMs to accelerate architecture discussions, explore design alternatives, and ensure systematic coverage of requirements, all while retaining human oversight.
+
+From a theoretical perspective, the results contribute to the growing field of AI-assisted software engineering by showing how DDD practices can be enriched through iterative, LLM-supported workflows. The proposed five-phase workflow—augmented by the suggestion to loop back from context definition to earlier phases—illustrates how AI can be embedded into established design practices in a way that feels natural and useful for practitioners.
+
+In conclusion, this thesis confirms that LLM-assisted domain modeling is not a replacement for human architects but a valuable tool for them. By combining the systematic, rapid analysis of LLMs with the contextual and practical wisdom of human experts, organizations can achieve better and faster outcomes in architectural design. Future work should build on this foundation by exploring automated tool support for iterative workflows, investigating how LLMs can better incorporate historical and organizational knowledge, and evaluating the approach in different domains and company contexts.  
+
+The overall vision that emerges is one of partnership: LLMs as powerful assistants that broaden the design space and challenge assumptions, and human architects as the final decision-makers who ground these ideas in practical reality. This collaborative model holds great promise for the future of software architecture in increasingly complex systems.

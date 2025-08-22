@@ -1,6 +1,6 @@
 Design the technical architecture following DDD patterns:
 
-1. Layer Architecture:
+1. Hexagonal Architecture:
    - Domain Layer: [Entities, VOs, Domain Services, Repositories interfaces]
    - Application Layer: [Application Services, DTOs, Commands/Queries]
    - Infrastructure Layer: [Repository implementations, External service adapters]
