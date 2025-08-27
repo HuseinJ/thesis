@@ -8,23 +8,21 @@ The study adopts a case-based mixed-methods design that combines qualitative obs
 
 The core research objective—evaluating the applicability of LLMs in bounded context identification—was pursued through a structured sequence of observation, LLM configuration, model generation, and expert assessment. Emphasis was placed on reproducing real-world constraints such as large requirement sets, limited architectural documentation, and tight business timelines.
 
-\section{Phase 1: Observational Baseline Assessment}
+\section{Observational Baseline Assessment}
 
-The first phase focused on gaining a comprehensive understanding of FTAPI's existing architecture, development practices, and modularization efforts. This included an in-depth review of architectural documentation, architectural decision records, API specifications, and relevant code artifacts. Particular attention was given to the structural limitations of the SecuMails domain, which remains monolithic and tightly coupled, and to the contrasting success of the SecuRooms domain, which had already been modularized using Domain-Driven Design (DDD) principles.
+The first part focused on gaining a comprehensive understanding of FTAPI's existing architecture, development practices, and modularization efforts. This included an in-depth review of architectural documentation, architectural decision records, API specifications, and relevant code artifacts. Particular attention was given to the structural limitations of the SecuMails domain, which remains monolithic and tightly coupled, and to the contrasting success of the SecuRooms domain, which had already been modularized using Domain-Driven Design (DDD) principles.
 
 By analyzing both technical artifacts and organizational practices, this phase aimed to capture the implicit criteria used by FTAPI engineers when identifying module boundaries. These insights informed the subsequent development of AI prompts and evaluation strategies, ensuring that the LLM analysis aligned with real-world architectural needs and constraints.
 
-\section{Phase 2: LLM Selection and Prompt Engineering}
+\section{LLM Selection and Prompt Engineering}
 
-In the second phase, the focus shifted to selecting appropriate LLMs and constructing a robust prompt engineering strategy tailored to DDD tasks. A comparative evaluation was conducted across several leading LLM platforms, including GPT-4 (OpenAI), Claude 4 (Anthropic), and Google's Gemini. These models were tested on representative requirement sets from FTAPI to assess their ability to retain context, generate consistent architectural outputs, and reason over large input spaces.
-
-Gemini was ultimately chosen as the primary model for subsequent experimentation. Its extended context window and consistent performance across complex domain inputs made it particularly well-suited for bounded context extraction tasks. While open-source alternatives such as LLaMA 2 were initially considered, they were excluded due to hardware limitations.
+In the second step, the focus shifted to selecting appropriate LLMs and constructing a robust prompt engineering strategy tailored to DDD tasks. A comparative evaluation was conducted across several leading LLM platforms, including GPT-5 (OpenAI), Claude 4.1 Opus (Anthropic), and Google's Gemini 2.5 Pro. These models were tested on representative requirement sets from FTAPI to assess their ability to retain context, generate consistent architectural outputs, and reason over large input spaces. While open-source alternatives such as LLaMA 2 were initially considered, they were excluded due to hardware limitations.
 
 To guide the model's behavior, a detailed prompt framework was developed. Rather than using direct instruction prompts, the model was positioned as a senior DDD specialist operating in an enterprise setting. This role-based approach encouraged the LLM to reason critically, challenge vague requirements, and simulate a sparring partner rather than a passive assistant. Prompts were refined iteratively based on output quality and expert feedback, and a five-phase analytical workflow was established to structure the model's analysis—from vocabulary extraction to architectural mapping.
 
-\section{Phase 3: Domain Model Generation and Evaluation}
+\section{Domain Model Generation and Evaluation}
 
-The final phase involved applying the configured LLM and prompt framework to generate bounded contexts and domain models for both SecuRooms and SecuMails. Requirement inputs were derived from FTAPI's internal documentation, including user stories, acceptance criteria, API definitions, and business process descriptions. These were formatted into structured plain-text files to support the LLM's contextual reasoning across multiple stages of analysis.
+The last part involved applying the configured LLM and prompt framework to generate bounded contexts and domain models for both SecuRooms and SecuMails. Requirement inputs were derived from FTAPI's internal documentation, including user stories, acceptance criteria, API definitions, and business process descriptions. These were formatted into structured plain-text files to support the LLM's contextual reasoning across multiple stages of analysis.
 
 For each domain, the LLM executed the full five-phase workflow: it began by identifying domain vocabulary and ubiquitous language, followed by simulated event storming, context boundary definition, aggregate modeling, and ultimately technical architecture design. Outputs were reviewed for consistency and iteratively refined through further interaction with the model.
 

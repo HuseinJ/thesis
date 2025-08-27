@@ -102,7 +102,7 @@ The event storming simulation for SecuRooms produced similar event flows across 
     \label{fig:event-create-securoom-claude} 
   \end{figure}
 
-Figure \ref{fig:event-create-securoom-claude} identified by Gemini shows an example of a more complex event flow: inviting a new user to an end-to-end encrypted SecuRoom. Because of the complexity of the process, this is a multi-step procedure. What is particularly notable here is that the LLM already tries to identify which aggregate handles what in this event flow. ...
+Figure \ref{fig:event-create-securoom-claude} identified by Gemini shows an example of a more complex event flow: inviting a new user to an end-to-end encrypted SecuRoom. Because of the complexity of the process, this is a multi-step procedure. What is particularly notable here is that the LLM already tries to identify aggregate and the responsabilities of those aggregates.
 
 \begin{figure}[H]
     \centering
@@ -111,12 +111,47 @@ Figure \ref{fig:event-create-securoom-claude} identified by Gemini shows an exam
     \label{fig:event-invite-new-user-gemini} 
   \end{figure}
 
-\subsection{Secumails}
+  \subsection{SecuMails}
+
+  For SecuMails we performed the same event storming steps, but with the larger requirements set the LLMs seemed to struggle with displaying it in a similar manner as in the SecuRooms domain. The years of accumulated features meant there were simply many more events to identify and connect.
+  
+  Claude took an interesting approach to handle this complexity. Figure \ref{fig:event-stormin-secumails-1} shows the first step where Claude wrote out all events in a list format, basically creating an inventory of everything that happens in the SecuMails domain. This list ended up with over 45 different events covering everything from delivery creation to encryption to notifications.
+  
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[height=7cm]{figures/secumails-event-storming-claude-1.png} 
+    \caption{Event list extraction for SecuMails - Claude 4.1 Opus}
+    \label{fig:event-stormin-secumails-1} 
+  \end{figure}
+  
+  As seen in Figure \ref{fig:event-stormin-secumails-2}, Claude then tried to combine these individual events into actual flows. This helped make sense of the complexity and was more readable than when trying to prompt Claude to display the events in a diagram like in the SecuRooms domain. The model grouped related events together, identifying patterns like the delivery lifecycle and encryption workflows, though the connections between different flows remained complex.
+  
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[height=7cm]{figures/secumails-claude-event-storming-2.png} 
+    \caption{Event flow organization for SecuMails - Claude 4.1 Opus}
+    \label{fig:event-stormin-secumails-2} 
+  \end{figure}
+  
+  Figure \ref{fig:diagram-event-storming-claude-1} shows what happened when we asked Claude to create a visual diagram similar to the SecuRooms ones. The diagram became extremely complex due to the sheer number of events that Claude tried to display at once. This visualization challenge really highlights the difference between the clean SecuRooms architecture and the entangled SecuMails monolith—where SecuRooms events follow clear paths, SecuMails events branch and interconnect in ways that are difficult to represent visually.
+  
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[height=5cm]{figures/diagram-secumail-event-1.png} 
+    \caption{Complex event diagram attempt for SecuMails - Claude 4.1 Opus}
+    \label{fig:diagram-event-storming-claude-1} 
+  \end{figure}
 
 \section{Proposed Bounded Contexts}
 
 \subsection{Securooms}
-insert images and descriptions of proposals
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[height=5cm]{figures/bounded-context-securoom-claude.png} 
+  \caption{Secumails proposed Bounded Contexts - Claude 4.1 Opus}
+  \label{fig:diagram-bounded-contexts-secumail-claude} 
+\end{figure}
+
 \subsection{Secumails}
 insert images and descriptions of proposals
 

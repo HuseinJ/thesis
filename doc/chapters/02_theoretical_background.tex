@@ -15,7 +15,7 @@ Evans provides a foundational definition of the term "domain" in his seminal wor
 Further he makes it clear that the domain represents more than just a subject area; it encompasses the entire business context within which a software system operates. It includes all the business rules, processes, workflows, terminology, and conceptual models that domain experts use when discussing and working within their field of expertise. Vernon \autocite[p.~17]{vernon2013implementing} further clarifies this by explaining that a domain is "a sphere of knowledge and activity around which the application logic revolves."
 
 \subsection{Ubiquitous Language}
-One of the core concepts of DDD is the development of a Ubiquitous Language - a shared vocabulary which is consistently used by domain experts and the developers. This shared vocabulary improves communication, mitigates translation errors and improves communication between technical and non-technical stakeholders when discussing the business domain.
+One of the core concepts of DDD is the development of a Ubiquitous Language. A Ubiquitous Language is a shared vocabulary which is consistently used by domain experts and the developers. This shared vocabulary improves communication, mitigates translation errors and improves communication between technical and non-technical stakeholders when discussing the business domain.
 
 Vernon \autocite[p.~22]{vernon2013implementing} provides an example on how Ubiquitous Language directly affects code design. he presents three approaches to modeling a flu vaccination scenario, each reflecting a different level of domain understanding:
 
@@ -52,7 +52,7 @@ This example demonstrates how the evolution of language directly impacts code st
 
 Ubiquitous Language plays a crucial role in identifying and maintaining bounded contexts. Evans \autocite[p.~13]{Evans2003} emphasizes that "the model is the backbone of a language used by all team members", and this language serves as the primary indicator of context boundaries. When the same term carries different meanings or when communication requires translation between team members, these linguistic fractures often reveal the natural boundaries between bounded contexts.
 
-Within a well-defined bounded context, every term has a single, precise meaning that all team members—both technical and domain experts—understand identically. This linguistic consistency prevents the subtle corruption of domain concepts that often occurs when boundaries are unclear. For instance, the term "customer" might mean a person with an active subscription in a billing context, while in a marketing context it could include prospects and past customers. These semantic differences signal the need for separate bounded contexts.
+Within a well-defined bounded context, every term has a single, precise meaning that all team members, both technical and domain experts, understand identically. This linguistic consistency prevents the subtle corruption of domain concepts that often occurs when boundaries are unclear. For instance, the term "customer" might mean a person with an active subscription in a billing context, while in a marketing context it could include prospects and past customers. These semantic differences signal the need for separate bounded contexts.
 
 \subsubsection{Relevance to LLM-Assisted Domain Modeling}
 This linguistic foundation presents both opportunities and challenges for LLM-assisted bounded context identification. Large Language Models possess the capability to detect semantic variations and linguistic patterns. They can potentially:
@@ -103,5 +103,3 @@ For the specific task of bounded context identification, prompt engineering beco
 \end{itemize}
 
 The challenge lies in developing prompts that can effectively communicate the nuanced requirements of domain modeling while accounting for the model's inherent limitations in understanding implicit domain knowledge. This balance between guidance and flexibility forms a central consideration in our empirical investigation of LLM-assisted bounded context identification.
-
-\subsection{Limitations and Challenges}

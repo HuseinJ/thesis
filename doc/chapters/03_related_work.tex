@@ -32,14 +32,12 @@ The industry began exploring alternative approaches that could address the scala
 
 The challenge of identifying optimal module boundaries has led to increased interest in Domain-Driven Design principles, particularly the concept of bounded contexts, as a systematic approach to decomposing monolithic systems. Evans' \autocite{evans2004domain} strategic design patterns provide a framework for identifying natural business boundaries that can serve as the foundation for modular architectures.
 
-\subsection{Decomposition Strategies using Domain Driven Design}
-research gap cant find anything.. :(
 
-\subsection{Monolith decomposition using LLM's}
-research gap cant find anything.. :(
+\section{Research Gap}
+Despite the growing body of research in both automated domain modeling and monolith decomposition, there exists a notable gap at the intersection of AI-assisted architecture generation and Domain-Driven Design methodologies. While studies like Chen et al. \autocite{chen2023automated} and Saini et al. \autocite{Saini2022} have explored LLM capabilities for domain model generation, and numerous works have addressed monolith decomposition strategies, the specific application of AI assistance to DDD's bounded context identification remains largely unexplored.
 
-\section{DDD and LLM's}
+Current research in automated domain modeling primarily focuses on generating UML diagrams or class structures from requirements, without explicitly considering the strategic patterns and bounded context principles fundamental to DDD. Similarly, existing monolith decomposition approaches often rely on technical metrics such as coupling and cohesion, or manual expert analysis, rather than leveraging the semantic understanding capabilities of modern LLMs to identify domain boundaries that align with business capabilities.
 
+The research gap becomes particularly evident when considering that DDD provides a well-defined framework with clear architectural patterns and concepts—such as bounded contexts, aggregates, and ubiquitous language—that could serve as structured targets for AI-assisted generation. This structured nature of DDD makes it potentially more amenable to AI assistance than general domain modeling, yet this synergy remains underexploited in current literature.
 
-\section{Research Gap??}
-...There are not many studies using Automated Domain Model Generation \ref{admg} and combinging with ddd where a clear format of the architecture design is given by the framework...
+This thesis addresses this research gap by proposing a semi-automated approach that specifically leverages LLMs to assist in bounded context identification within the DDD framework. By combining the semantic understanding capabilities of AI with the structured patterns of DDD, this work aims to provide a practical solution for organizations seeking to modernize their monolithic architectures while maintaining alignment between technical boundaries and business domains.
