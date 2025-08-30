@@ -1,18 +1,12 @@
-\chapter{Study Context: FTAPI Software GmbH}
-\begin{figure}[H]
-    \centering
-    \includegraphics[height=2cm]{logos/FTAPI-icon.png} 
-    \caption{FTAPI Software GmbH Logo}
-    \label{fig:ftapi-logo} 
-  \end{figure}
+\chapter{Study Context: FTAPI Software GmbH}\label{chapter:ftapi}
 Founded in 2010, FTAPI Software GmbH has consistently pursued a clear vision: enabling organizations to maintain complete control over their data exchange—enhancing efficiency, security, and digital sovereignty. Today, approximately 2,000 companies and more than a million active users rely on FTAPI's platform for secure data exchange.
 
 
 \section{Company and Product Overview}
-FTAPI has created a data exchange platform designed to address the growing need for secure and compliant data transfer in modern organisations. The main platform is called Secutransfer and it serves as an integrated solution for exchanging sensitive and business-critical data across organizational boundaries while maintaining strict security and legal compliance standards, such as GDPR, NIS-2, and TISAX® \cite{ftapi2025}
+FTAPI\footcite{ftapi2025} has created a data exchange platform designed to address the growing need for secure and compliant data transfer in modern organisations. The main platform is called Secutransfer and it serves as an integrated solution for exchanging sensitive and business-critical data across organizational boundaries while maintaining strict security and legal compliance standards, such as GDPR, NIS-2, and TISAX® 
 
 \subsection{Core Platform Components}
-The platform consists of four interconnected products \cite{ftapi2025} that can be used individually or as an integrated suite:
+The platform consists of four interconnected products that can be used individually or as an integrated suite:
 
 \subsubsection{SecuMails - Email Encryption}\label{sec:secumails}
 SecuMails enables secure encrypted email communication without requiring complex infrastructure. The solution operates through web browsers or via an Outlook add-in, supporting file transfers up to 100 GB. This addresses common limitations of traditional email systems while ensuring compliance with common legal regulations
@@ -28,7 +22,7 @@ SecuForms provides a secure web-based form creation and data collection platform
 
 \section{Current Architectural Challenges}
 
-This section examines FTAPI's current software architecture, highlighting both the challenges posed by legacy monolithic structures and the opportunities presented by successful domain-driven modernization efforts. By analyzing the contrast between the problematic SecuMails monolith and the successfully modularized SecuRooms domain, this section establishes the context for investigating how Large Language Models can assist in architectural transformation processes.
+This section examines FTAPI's current software architecture, focusing on the challenges of legacy monolithic structures and the opportunities arising from domain-driven modernization. By contrasting the organically grown SecuMails monolith with the newly built SecuRooms domain, it provides the context for exploring how Large Language Models can support architectural transformation.
 
 \subsection{Legacy Monolithic Structure}
 Over its operational lifetime, FTAPI's core software platform has undergone continuous expansion to address evolving business requirements and increasing user demands. This organic growth pattern has resulted in the implementation of numerous features without adequate consideration of the underlying architectural implications. The accumulation of such architectural decisions has led to a system where the legacy SecuMails domain—representing the core email encryption business—remains characterized by high coupling, limited modularity, and accumulated technical debt within a monolithic structure.

@@ -17,9 +17,15 @@ Further he makes it clear that the domain represents more than just a subject ar
 \subsection{Ubiquitous Language}
 One of the core concepts of DDD is the development of a Ubiquitous Language. A Ubiquitous Language is a shared vocabulary which is consistently used by domain experts and the developers. This shared vocabulary improves communication, mitigates translation errors and improves communication between technical and non-technical stakeholders when discussing the business domain.
 
-Vernon \autocite[p.~22]{vernon2013implementing} provides an example on how Ubiquitous Language directly affects code design. he presents three approaches to modeling a flu vaccination scenario, each reflecting a different level of domain understanding:
+Vernon \autocite[p.~22]{vernon2013implementing} provides an example on how Ubiquitous Language directly affects code design. He presents three approaches to modeling a flu vaccination scenario, each reflecting a different level of domain understanding.
 
-\begin{figure}[H]
+His example shown in Table~\ref{tab:ubiquitous-language-examples} demonstrates how the evolution of language directly impacts code structure and domain modeling. The progression from generic, technical language to precise, domain-aligned terminology, illustrates a fundamental principle: the language we use shapes the software we build.
+
+Ubiquitous Language plays a crucial role in identifying and maintaining bounded contexts. Evans \autocite[p.~13]{Evans2003} emphasizes that "the model is the backbone of a language used by all team members", and this language serves as the primary indicator of context boundaries. When the same term carries different meanings or when communication requires translation between team members, these linguistic fractures often reveal the natural boundaries between bounded contexts.
+
+Within a well-defined bounded context, every term has a single, precise meaning that all team members, both technical and domain experts, understand identically. This linguistic consistency prevents the subtle corruption of domain concepts that often occurs when boundaries are unclear. For instance, the term "customer" might mean a person with an active subscription in a billing context, while in a marketing context it could include prospects and past customers. These semantic differences signal the need for separate bounded contexts.
+
+\begin{figure}[htbp]
     \centering
     \begin{tabular}{p{4cm}p{10cm}}
     \toprule
@@ -48,12 +54,6 @@ nurse.administerFluVaccine(patient, vaccine);
     \label{tab:ubiquitous-language-examples}
 \end{figure}
 
-This example demonstrates how the evolution of language directly impacts code structure and domain modeling. The progression from generic, technical language to precise, domain-aligned terminology, as shown in Table~\ref{tab:ubiquitous-language-examples}, illustrates a fundamental principle: the language we use shapes the software we build.
-
-Ubiquitous Language plays a crucial role in identifying and maintaining bounded contexts. Evans \autocite[p.~13]{Evans2003} emphasizes that "the model is the backbone of a language used by all team members", and this language serves as the primary indicator of context boundaries. When the same term carries different meanings or when communication requires translation between team members, these linguistic fractures often reveal the natural boundaries between bounded contexts.
-
-Within a well-defined bounded context, every term has a single, precise meaning that all team members, both technical and domain experts, understand identically. This linguistic consistency prevents the subtle corruption of domain concepts that often occurs when boundaries are unclear. For instance, the term "customer" might mean a person with an active subscription in a billing context, while in a marketing context it could include prospects and past customers. These semantic differences signal the need for separate bounded contexts.
-
 \subsubsection{Relevance to LLM-Assisted Domain Modeling}
 This linguistic foundation presents both opportunities and challenges for LLM-assisted bounded context identification. Large Language Models possess the capability to detect semantic variations and linguistic patterns. They can potentially:
 
@@ -71,8 +71,13 @@ However, the challenge lies in ensuring that LLMs understand the domain-specific
 Understanding the distinction and relationship between subdomains and bounded contexts is fundamental to Domain-Driven Design and crucial for this thesis, as bounded contexts form the primary unit of modularization in our investigation.
 
 \subsubsection{Defining Subdomains and Bounded Contexts}
-A subdomain represents a distinct area of the business domain, corresponding to different aspects of the organization's activities. Evans \autocite[]{Evans2003} describes subdomains as natural divisions within the problem space—the actual business areas that the software must address. Evans identifies three types of subdomains: the \textit{Core Domain}, which provides competitive advantage; \textit{Supporting Subdomains}, which are necessary but not differentiating; and \textit{Generic Subdomains}, which address common problems faced by many businesses \autocite[]{Evans2003}.
-In contrast, a bounded context exists in the solution space as "the delimited applicability of a particular model" \autocite[]{Evans2003}. It establishes explicit boundaries within which a domain model remains consistent and unified, encompassing linguistic boundaries (consistent ubiquitous language), team boundaries (organizational alignment), and technical boundaries (code bases, schemas, deployment units) \autocite[]{Evans2003}.
+
+A subdomain represents a distinct area of the business domain, corresponding to different aspects of the organization's activities. Evans \autocite{Evans2003} identifies three types of subdomains: the \textit{Core Domain}, which provides competitive advantage; \textit{Supporting Subdomains}, which are necessary but not differentiating; and \textit{Generic Subdomains}, which address common problems faced by many businesses.
+
+In contrast, a bounded context exists in the solution space as the delimited applicability of a particular domain model \autocite{Evans2003}. It establishes explicit boundaries within which a domain model remains consistent and unified. These boundaries encompass linguistic aspects (consistent ubiquitous language), organizational aspects (team alignment), and technical aspects (code bases, schemas, deployment units).
+
+The relationship between subdomains and bounded contexts is not necessarily one-to-one. While ideally each subdomain maps to a single bounded context, practical constraints often lead to different arrangements where a bounded context might span multiple subdomains or a subdomain might be split across multiple contexts \autocite{Evans2003}.
+
 \subsubsection{The Relationship Between Subdomains and Bounded Contexts}
 While subdomains and bounded contexts often align, Evans \autocite[]{Evans2003} warns against assuming a one-to-one correspondence. In practice, legacy constraints, team structures, and technical limitations influence how subdomain boundaries map to bounded contexts. A single bounded context might encompass multiple subdomains, or a subdomain might span multiple contexts.
 This distinction proves critical for modularization efforts like those at FTAPI: subdomain identification provides business-driven boundaries, while bounded context design translates these into implementable software modules. As Evans notes, "when code based on distinct models is combined, software becomes buggy, unreliable, and difficult to understand" \autocite[p.~271]{Evans2003}—making bounded contexts the fundamental unit for maintaining model integrity during modularization.

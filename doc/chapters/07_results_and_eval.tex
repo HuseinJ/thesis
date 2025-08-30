@@ -1,4 +1,4 @@
-\chapter{Results and Evaluation}
+\chapter{Results and Evaluation}\label{chapter:results}
 
 This chapter presents the results and findings from this work in extracting bounded contexts within FTAPI's software ecosystem. Building upon the five-phase workflow established in Chapter 6, we analyze how Large Language Models performed across each stage of the Domain Driven Design process. From establishing a ubiquitous language to proposing technical architecture mappings. The results reveal both the cpapbilities and limitations of current AI models in supporting domain modeling efforts.
 
@@ -8,7 +8,7 @@ The LLM's were first tasked to capture the ubiquitous language from a large requ
 \subsection{Securooms}
 The SecuRooms requirements, produced remarkably consistent core vocabulary across all three models. The Table \ref{tab:securooms-ubiquitous-language} presents a comparative analysis of key domain terms extracted by each LLM. All models successfully identified the central concept of a "SecuRoom" as a secure container for file collaboration, though their specific definitions revealed subtle differences in understanding. Claude emphasized the optional nature of end-to-end encryption, reflecting the product's flexibility, while Gemini focused on the SecuRoom as the primary workspace and access boundary. GPT provided the most architecturally-oriented definition, explicitly mentioning "security and access boundary" as defining characteristics. Particularly noteworthy was the treatment of "SecuPass," the personal password protecting users' private keys for end-to-end encryption. All models correctly identified its critical security function and irrecoverable nature. Claude and Gemini explicitly noted that without the SecuPass, encrypted content becomes permanently inaccessible—a crucial business invariant that GPT captured more implicitly through the term "personal credential."
 
-\begin{table}[H]
+\begin{table}[htbp]
     \centering
     \begin{tabular}{|p{2.5cm}|p{4cm}|p{4cm}|p{4cm}|}
     \hline
@@ -56,7 +56,7 @@ The SecuRooms requirements, produced remarkably consistent core vocabulary acros
 
 The SecuMails requirements produced consistent vocabulary extraction across the three models, though with notable variations reflecting the domain's monolithic complexity and accumulated technical debt. Table \ref{tab:secumails-ubiquitous-language} presents a comparative analysis of key domain terms extracted by each LLM. All models successfully identified "Delivery" as the core concept for secure message transfer. Claude emphasized its immutable nature—"once sent, cannot be modified"—capturing a fundamental business constraint. Gemini provided a structural definition highlighting the delivery as "the core container for a secure transfer" with subject, message, and attachments. GPT framed it as a "secure unit" emphasizing both security and flexibility in recipient handling. The "SubmitBox" concept demonstrated consistent understanding across models as a secure digital mailbox for external submissions, though with varying emphasis. Claude focused on ownership ("owned by a user"), Gemini stressed uniqueness and security per user, while GPT noted broader applicability to both users and organizations.
 
-\begin{table}[H]
+\begin{table}[htbp]
     \centering
     \begin{tabular}{|p{2.5cm}|p{4cm}|p{4cm}|p{4cm}|}
     \hline
