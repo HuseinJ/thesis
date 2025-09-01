@@ -69,9 +69,6 @@ When it came to aggregate identification, experts were asked: \textit{"Do you th
 
 Overall, Phases 3--5 showed that LLMs can provide useful starting points for boundary definition and architectural exploration, but their outputs should be seen as conversation starters rather than final designs. Human expertise remains crucial to balance theoretical separation with practical constraints, and to ensure that aggregate design reflects not only domain concepts but also the accumulated knowledge of the system's evolution.
 
-\subsection{Proposal for improvement}
-
-
 \section{Strengths and Limitations of the Approach}
 
 \subsection{Key Strengths}
@@ -87,15 +84,90 @@ Experts also valued the fresh, unbiased perspective of the LLMs. A good example 
 
 \subsection{Critical Limitations}
 
-\subsubsection{Contextual Understanding Gaps}
-At the same time, the LLMs showed clear weaknesses. Experts pointed out that the models lacked contextual understanding of why the current architecture looks the way it does. For instance, the decision not to model Access Control as its own context was shaped by historical and practical reasons, which the LLM could not infer from requirements ant the questioning alone.
+Despite these strengths, the study also revealed clear limitations in the LLM-based approach. Most notably, the models often lacked contextual awareness of the historical and organizational factors that shape existing architectures. For example, the decision not to separate Access Control as its own bounded context in SecuRooms was heavily influenced by long-standing practical considerations. Such rationales were invisible to the LLMs, which could only rely on textual requirements and structured questioning.
 
-\subsubsection{Practical Coupling Considerations}
-The LLM also struggled to recognize tight dependencies. These couplings are obvious to experienced practitioners but were sometimes ignored in the LLM's proposals.
+A related limitation concerns the handling of dependencies. While experienced practitioners readily recognize strong couplings and their impact on maintainability, the LLMs frequently overlooked them. This sometimes resulted in overly fine-grained or theoretically “clean” decompositions that would be impractical to implement in reality. As one expert observed, the proposed models occasionally looked convincing on paper but would not stand up to the operational demands of the system.
+
+Finally, aggregate design emerged as an area where the LLMs fell short. Although some of the suggested aggregates aligned with existing core structures, many lacked the contextual depth and nuanced design choices that evolve over years of development and real-world use. This limitation suggests that current LLMs cannot yet replace the deep, tacit domain expertise required for shaping aggregates that balance conceptual soundness with practical feasibility.
+
+\section{Proposal for Improvement}
+
+A recurring theme in the expert interviews was the need for stronger validation mechanisms within the workflow. While the five-phase process provided a clear progression from language extraction to technical mapping, its linear structure risked carrying forward unnoticed inaccuracies. One expert noted that it would be valuable to introduce feedback loops between phases, so that the LLM can reassess whether previously captured use cases, events, or aggregates remain well-placed in light of later design decisions.
+
+For instance, after bounded context identification (Phase 3), the LLM could revisit the earlier event storming results to ensure that all events are consistently represented within the proposed contexts. Similarly, after aggregate design (Phase 4), the workflow could trigger a reflection step to verify whether aggregates still honor the ubiquitous language defined in Phase 1. These iterative checks would not replace expert judgment, but they could significantly reduce the risk of drift between phases and strengthen the overall consistency of the generated model.
+
+Figure~\ref{fig:improved-ddd-workflow} illustrates this refined workflow. The forward arrows represent the sequential progress of the analysis, while the dashed feedback arrows highlight the validation loops that connect each phase back to earlier results. This improvement turns the workflow from a one-way pipeline into a more resilient, iterative process that better reflects the reflective nature of real-world domain modeling. As one expert emphasized, revisiting earlier phases to validate and adjust previous results is not only useful but also a common practice in professional software architecture work.
+
+\begin{figure}[htbp]
+    \centering
+    \begin{tikzpicture}[
+        node distance=0.9cm,
+        phase/.style={
+            rectangle, rounded corners=4pt, minimum width=7.2cm,
+            minimum height=1.4cm, text centered, draw=black, font=\small\bfseries, text width=7cm
+        },
+        arrow/.style={thick,->,>=stealth, color=blue!70},
+        feedback/.style={thick,->,>=stealth, dashed, color=gray!70}
+    ]
+    
+    % Title
+    \node[font=\Large\bfseries] at (0, 1.2) {Improved LLM-Assisted DDD Analysis Workflow};
+    
+    % Phases
+    \node (phase1) [phase, fill=blue!10] at (0, 0) {
+        Phase 1: Ubiquitous Language Establishment\\
+        \scriptsize Extract domain vocabulary, define glossary
+    };
+    
+    \node (phase2) [phase, below=of phase1, fill=red!10] {
+        Phase 2: Event Storming Simulation\\
+        \scriptsize Identify events, commands, actors
+    };
+    
+    \node (phase3) [phase, below=of phase2, fill=orange!10] {
+        Phase 3: Bounded Context Identification\\
+        \scriptsize Group concepts into cohesive contexts
+    };
+    
+    \node (phase4) [phase, below=of phase3, fill=purple!10] {
+        Phase 4: Aggregate Design\\
+        \scriptsize Define aggregates, entities, invariants
+    };
+    
+    \node (phase5) [phase, below=of phase4, fill=green!10] {
+        Phase 5: Technical Architecture Mapping\\
+        \scriptsize Design ports, adapters, infrastructure
+    };
+    
+    \node (output) [phase, below=of phase5, fill=gray!10, minimum height=1.5cm, font=\bfseries] {
+        Complete Domain Model\\
+        \scriptsize Bounded Contexts • Aggregates • Architecture
+    };
+    
+    % Forward arrows
+    \draw [arrow] (phase1.south) -- (phase2.north);
+    \draw [arrow] (phase2.south) -- (phase3.north);
+    \draw [arrow] (phase3.south) -- (phase4.north);
+    \draw [arrow] (phase4.south) -- (phase5.north);
+    \draw [arrow] (phase5.south) -- (output.north);
+    
+    % Feedback loops
+    \draw [feedback, bend left=25] (phase2.west) to node[midway,left,xshift=-0.1cm,font=\scriptsize]{Validate terminology} (phase1.west);
+    \draw [feedback, bend left=25] (phase3.west) to node[midway,left,font=\scriptsize]{Check events} (phase2.west);
+    \draw [feedback, bend left=25] (phase4.west) to node[midway,left,font=\scriptsize]{Check contexts} (phase3.west);
+    \draw [feedback, bend left=25] (phase5.west) to node[midway,left,font=\scriptsize]{Check aggregates} (phase4.west);
+    
+\end{tikzpicture}
+\caption{Improved workflow with validation loops between phases}
+\label{fig:improved-ddd-workflow}
+\end{figure}
+
 
 \section{Future Research Directions}
 
-WIP: ???
+This study has shown that LLMs can provide valuable support in domain-driven design analysis, yet several open questions remain that point toward fruitful directions for future research. One important avenue concerns the enhancement of contextual awareness. Current models operate largely on textual input and thus overlook the organizational histories, implicit rationales, and long-standing constraints that shape real-world architectures. Future research could explore ways of embedding richer organizational memory into LLM-assisted modeling, for instance by incorporating architecture decision records, commit histories, or domain-specific knowledge bases. Such approaches could help bridge the gap between abstract textual modeling and the practical realities of evolving software systems.
+
+A second promising direction lies in the area of domain-specific fine-tuning and tool integration. While general-purpose LLMs already exhibit strong performance, their utility in software architecture tasks could be significantly improved by training them on domain-specific corpora or embedding them within existing modeling environments. Integrations with tools such as event-storming boards, UML editors, or code-centric architecture platforms would allow validation and refinement loops to occur more seamlessly, reducing friction between AI outputs and established workflows. This could transform the LLM from a stand-alone assistant into an embedded, context-aware design partner.
 
 \section{Conclusion}
 
@@ -111,6 +183,6 @@ From a practical perspective, this thesis demonstrates how AI-assisted modeling 
 
 From a theoretical perspective, the results contribute to the growing field of AI-assisted software engineering by showing how DDD practices can be enriched through iterative, LLM-supported workflows. The proposed five-phase workflow—augmented by the suggestion to loop back from context definition to earlier phases—illustrates how AI can be embedded into established design practices in a way that feels natural and useful for practitioners.
 
-In conclusion, this thesis confirms that LLM-assisted domain modeling is not a replacement for human architects but a valuable tool for them. By combining the systematic, rapid analysis of LLMs with the contextual and practical wisdom of human experts, organizations can achieve better and faster outcomes in architectural design. Future work should build on this foundation by exploring automated tool support for iterative workflows, investigating how LLMs can better incorporate historical and organizational knowledge, and evaluating the approach in different domains and company contexts.  
+From a theoretical perspective, this thesis contributes to the growing field of AI-assisted software engineering by showing how DDD practices can be enriched through iterative, LLM-supported workflows. The proposed five-phase workflow—enhanced with validation loops that allow revisiting earlier phases—demonstrates how AI can be embedded into established design practices in a way that feels both natural and useful for practitioners.
 
-The overall vision that emerges is one of partnership: LLMs as powerful assistants that broaden the design space and challenge assumptions, and human architects as the final decision-makers who ground these ideas in practical reality. This collaborative model holds great promise for the future of software architecture in increasingly complex systems.
+In conclusion, this work confirms that LLM-assisted domain modeling is not a replacement for human architects but a powerful complement. By combining the systematic, rapid analysis of LLMs with the contextual judgment of human experts, organizations can achieve more grounded and innovative outcomes in architectural design. The vision that emerges is one of partnership: LLMs as assistants that broaden the design space and challenge assumptions, and human architects as decision-makers who anchor these ideas in practical reality. This collaborative model holds significant promise for the future of software architecture in increasingly complex systems.
