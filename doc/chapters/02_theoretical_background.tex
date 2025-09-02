@@ -82,22 +82,18 @@ The relationship between subdomains and bounded contexts is not necessarily one-
 While subdomains and bounded contexts often align, Evans \autocite[]{Evans2003} warns against assuming a one-to-one correspondence. In practice, legacy constraints, team structures, and technical limitations influence how subdomain boundaries map to bounded contexts. A single bounded context might encompass multiple subdomains, or a subdomain might span multiple contexts.
 This distinction proves critical for modularization efforts like those at FTAPI: subdomain identification provides business-driven boundaries, while bounded context design translates these into implementable software modules. As Evans notes, "when code based on distinct models is combined, software becomes buggy, unreliable, and difficult to understand" \autocite[p.~271]{Evans2003}—making bounded contexts the fundamental unit for maintaining model integrity during modularization.
 
-
-\section{Large Language Models}
-This section presents an analysis of Large Language Models, covering their technological evolution, fundamental capabilities, and practical applications in software engineering. We pay special attention to both the opportunities they offer and the limitations that must be addressed when leveraging these models for domain-driven design tasks, particularly bounded context identification.
-
-\subsection{Prompt Engineering}
+\Section{Prompt Engineering}
 Prompt engineering has emerged as a critical discipline for optimizing interactions with Large Language Models. As Aqsa et al. \autocite[]{promptAqsa} define it, prompt engineering involves "the strategic arrangement of input queries under prompt engineering methodology [which] leads to enhanced LLM output efficiency and accuracy as well as improved coherence." This field focuses on crafting structured inputs that guide models to produce accurate, contextually relevant, and task-appropriate outputs.
 
-\subsubsection{Core Techniques and Approaches}
+\subsection{Core Techniques and Approaches}
 The effectiveness of prompt engineering relies on several established techniques. Structured prompting involves carefully designed prompts that specify roles, contexts, and constraints. Role-based prompting, for instance, instructs the model to respond from a specific perspective (e.g., "Act as a cybersecurity expert"), which enhances domain-specific precision by aligning responses with expert knowledge patterns \autocite[]{promptAqsa}. Iterative refinement allows continuous improvement of prompts based on previous model outputs, while chain-of-thought prompting guides models through systematic reasoning processes—particularly valuable for complex problem-solving tasks.
 
-\subsubsection{Emerging Trends and Rapid Evolution}
+\subsection{Emerging Trends and Rapid Evolution}
 The field of prompt engineering is evolving at an unprecedented pace. Recent developments include automated prompt generation using reinforcement learning from human feedback (RLHF), multi-modal prompting that combines text with visual inputs, and collaborative human-AI systems for prompt optimization \autocite[]{promptAqsa}. These advancements are rapidly transforming how practitioners interact with LLMs across various domains.
 
 However, this rapid evolution presents a unique challenge for researchers and practitioners. Traditional academic literature, with its lengthy peer-review cycles, often becomes outdated by the time of publication. The techniques and best practices that were state-of-the-art six months ago may already be superseded by new approaches. This temporal mismatch between the pace of development and academic publishing means that practitioners increasingly rely on alternative sources of information—including technical blogs, preprint servers, open-source repositories, and community forums—to stay current with the latest prompt engineering strategies.
 
-\subsubsection{Relevance to Domain Modeling}
+\subsection{Relevance to Domain Modeling}
 For the specific task of bounded context identification, prompt engineering becomes particularly crucial. The quality of prompts directly influences whether an LLM can accurately understand domain-specific terminology, identify linguistic boundaries between contexts, and propose meaningful architectural divisions. Effective prompts must guide the model to:
 
 \begin{itemize}

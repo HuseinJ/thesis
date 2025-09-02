@@ -1,41 +1,36 @@
 \chapter{Implementation}\label{chapter:implementation}
 This chapter documents the empirical investigation of LLM-assisted bounded context extraction, conducted through a systematic comparison of AI-generated domain models against manually-crafted architectures within FTAPI's software ecosystem.
 
-\section{LLM Configuration and Setup}
-
-\subsection{Model Selection and Configuration}
+\Section{LLM Selection and Configuration}
 The initial phase focused on evaluating different LLM options for domain modeling tasks. Given the computational resource constraints typical in academic research environments, deploying and running effective open-source models locally proved impractical. Consequently, the evaluation was conducted using commercially available AI chat interfaces, which provided access to state-of-the-art models without requiring extensive computational infrastructure.
 
-\subsubsection{Initial Model Evaluation}
+\subsection{Initial Model Evaluation}
 Three leading LLM platforms were selected for preliminary testing based on their documented capabilities in code analysis and architectural reasoning tasks: Claude Opus 4.1 (Anthropic), GPT-5 (OpenAI), and Gemini 2.5 Pro (Google). This selection represented the current state-of-the-art in commercially available large language models, each offering distinct approaches to natural language understanding and reasoning.
 
-\subsubsection{Resource Constraints and Practical Considerations}
+\subsection{Resource Constraints and Practical Considerations}
 The decision to utilize commercial chat interfaces rather than self-hosted open-source alternatives was driven by practical limitations. While open-source models such as LLaMA 2 and CodeLlama were initially considered, the computational requirements for running these models effectively exceeded available hardware resources. The commercial platforms provided consistent access to powerful models without the overhead of infrastructure management, enabling focus on the core research questions rather than technical deployment challenges.
 
-\subsection{Prompt Dependency and Model-Specific Optimization}
-It is important to note that the performance differences observed across models likely exhibit strong dependency on the specific prompt engineering approach employed. The varying performance characteristics of each model may be attributed not only to their inherent architectural capabilities but also to the interaction between each model's training characteristics and the particular prompt formulations developed for this research. Different prompt strategies might yield varying relative performance across the evaluated models, suggesting that optimal model selection in LLM-assisted domain modeling requires careful consideration of both model capabilities and prompt engineering compatibility.
-
-Given the uncertainty regarding which model would perform best for the specific task of bounded context identification, all evaluated LLMs were considered and tested throughout the experimental phase. This comprehensive approach allowed for empirical comparison of each model's strengths and weaknesses within the context of domain modeling tasks. The decision to evaluate multiple models rather than committing to a single LLM early in the research process enabled a more robust understanding of how different models interpret and respond to domain modeling prompts.
-
-This multi-model evaluation strategy proved valuable in identifying model-specific behaviors and capabilities that would not have been apparent from theoretical analysis alone. By maintaining flexibility in model selection throughout the experiments, the research could adapt to empirical findings rather than being constrained by initial assumptions about model suitability for DDD-based architectural analysis.
-
 \section{Prompt Engineering Framework}
+A robust and consistent prompt engineering framework was central to this research, designed to elicit sophisticated architectural reasoning from Large Language Models (LLMs). This section details the rationale for the multi-model evaluation approach, the overall design philosophy of the prompts, and the specific role-based architecture employed throughout the experiments.
+
+\subsection{Rationale for a Multi-Model Approach}
+The performance differences observed across LLMs exhibit a strong dependency on the specific prompt engineering approach employed. The varying characteristics of each model can be attributed not only to their inherent architectural capabilities but also to the complex interaction between their training data and the particular prompt formulations developed for this research. A prompt strategy that is effective for one model may yield suboptimal results with another, suggesting that effective LLM-assisted domain modeling requires careful consideration of this prompt-model compatibility.
+
+Given this uncertainty, committing to a single LLM early in the research process would have introduced significant bias. Instead, a comprehensive multi-model evaluation was adopted. All evaluated LLMs were tested throughout the experimental phase, allowing for a direct empirical comparison of their strengths and weaknesses. This strategy proved invaluable for identifying model-specific behaviors that would not have been apparent from theoretical analysis alone. By maintaining flexibility, the research could adapt to empirical findings rather than being constrained by initial assumptions about a single model's suitability for DDD-based architectural analysis.
 
 \subsection{Prompt Development Strategy}
-The prompt engineering approach was designed to simulate the experience of working with a senior Domain-Driven Design specialist in an enterprise environment. Rather than simply requesting architectural outputs, the prompts were structured to create an interactive, questioning-based methodology that mirrors real-world DDD consulting practices. This approach aimed to leverage the LLM's reasoning capabilities by embedding it within a realistic professional context where architectural decisions must be justified and explored thoroughly.
+To ensure a fair and rigorous comparison across models, the prompt engineering approach was designed to simulate the experience of collaborating with a senior Domain-Driven Design (DDD) specialist. Rather than simply requesting architectural outputs, the prompts were structured to create an interactive, questioning-based methodology that mirrors real-world DDD consulting practices. This approach aimed to leverage the LLM's reasoning capabilities by embedding it within a realistic professional context where architectural decisions must be justified and explored thoroughly.
 
 \subsection{Role-Based Prompt Architecture}
-The prompt engineering strategy centers on establishing a comprehensive role-based framework that positions the LLM as a senior Domain-Driven Design specialist with extensive enterprise experience. This approach moves beyond simple instruction-based prompting to create a professional persona that embodies both expertise and critical thinking capabilities essential for architectural analysis.
+The core of the framework is a comprehensive role-based architecture that positions the LLM as an expert consultant. This strategy moves beyond simple instructions to create a professional persona embodying the critical thinking essential for architectural analysis.
 
 \subsubsection{Core Role Definition}
 The primary role prompt (see Appendix~\ref{app:role-prompt}) establishes the LLM as a "Senior Domain-Driven Design Specialist \& Architectural Sparring Partner" with over 10 years of enterprise DDD implementation experience. This detailed persona specification serves multiple strategic purposes: it provides contextual grounding for the expected level of architectural sophistication, establishes an interactive rather than passive analytical approach, and creates behavioral expectations for rigorous questioning and assumption challenging.
 
-\subsubsection{Behavioral Guidelines}
-The role definition includes specific behavioral instructions that guide the LLM toward DDD best practices enforcement, collaborative modeling approaches, and active challenging of vague or ambiguous concepts. This behavioral framework ensures consistency in how the model approaches domain modeling tasks across different requirement sets.
+\subsubsection{Behavioral Guidelines and Context Simulation}
+The role definition includes specific behavioral instructions that guide the LLM's analytical process. It is instructed to enforce DDD best practices, engage in collaborative modeling, and actively challenge vague or ambiguous concepts. This behavioral framework ensures consistency in how the model approaches domain modeling tasks across different requirement sets.
 
-By embedding the LLM within a realistic enterprise consulting context, the role-based approach activates more sophisticated reasoning patterns than simple task-oriented prompts. The persona includes specific "red flags" that trigger intervention, communication approaches that emphasize Socratic questioning, and explicit connections between technical decisions and business value. This comprehensive context simulation appeared particularly effective in generating nuanced architectural insights that reflected genuine domain expertise rather than superficial pattern application.
-
-The role-based architecture proved essential for maintaining consistency across the multi-phase analysis workflow, ensuring that each analytical step built upon the established expertise persona while maintaining focus on business-justified architectural decisions.
+By embedding the LLM within this realistic consulting context—complete with "red flags" that trigger intervention, a communication style based on Socratic questioning, and an emphasis on business value—the prompts activate more sophisticated reasoning patterns. This comprehensive context simulation was highly effective in generating nuanced architectural insights that reflected genuine domain expertise. The role-based architecture proved essential for maintaining consistency across the multi-phase analysis, ensuring each step built upon the established expert persona.
 
 \subsection{Structured Analysis Workflow}
 

@@ -32,5 +32,7 @@ thorough exploration of architectural candidates, ultimately leading to more rob
 and maintainable systems.
 
 Author: Husein Jusic
+
 Supervisor: Tobias Eisenreich
+
 Advisor: Michael Krinninger
