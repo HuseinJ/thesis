@@ -1,7 +1,7 @@
 \chapter{Implementation}\label{chapter:implementation}
 This chapter documents the empirical investigation of LLM-assisted bounded context extraction, conducted through a systematic comparison of AI-generated domain models against manually-crafted architectures within FTAPI's software ecosystem.
 
-\Section{LLM Selection and Configuration}
+\section{LLM Selection and Configuration}
 The initial phase focused on evaluating different LLM options for domain modeling tasks. Given the computational resource constraints typical in academic research environments, deploying and running effective open-source models locally proved impractical. Consequently, the evaluation was conducted using commercially available AI chat interfaces, which provided access to state-of-the-art models without requiring extensive computational infrastructure.
 
 \subsection{Initial Model Evaluation}
@@ -19,7 +19,7 @@ The performance differences observed across LLMs exhibit a strong dependency on 
 Given this uncertainty, committing to a single LLM early in the research process would have introduced significant bias. Instead, a comprehensive multi-model evaluation was adopted. All evaluated LLMs were tested throughout the experimental phase, allowing for a direct empirical comparison of their strengths and weaknesses. This strategy proved invaluable for identifying model-specific behaviors that would not have been apparent from theoretical analysis alone. By maintaining flexibility, the research could adapt to empirical findings rather than being constrained by initial assumptions about a single model's suitability for DDD-based architectural analysis.
 
 \subsection{Prompt Development Strategy}
-To ensure a fair and rigorous comparison across models, the prompt engineering approach was designed to simulate the experience of collaborating with a senior Domain-Driven Design (DDD) specialist. Rather than simply requesting architectural outputs, the prompts were structured to create an interactive, questioning-based methodology that mirrors real-world DDD consulting practices. This approach aimed to leverage the LLM's reasoning capabilities by embedding it within a realistic professional context where architectural decisions must be justified and explored thoroughly.
+To ensure a fair and rigorous comparison across models, the prompt engineering approach was designed to simulate the experience of collaborating with a senior Domain-Driven Design (DDD) specialist. Rather than simply requesting architectural outputs, the prompts were structured to create an interactive, questioning-based methodology that mirrors real-world DDD consulting practices. This approach aimed to leverage the LLMs reasoning capabilities by embedding it within a realistic professional context where architectural decisions must be justified and explored thoroughly.
 
 \subsection{Role-Based Prompt Architecture}
 The core of the framework is a comprehensive role-based architecture that positions the LLM as an expert consultant. This strategy moves beyond simple instructions to create a professional persona embodying the critical thinking essential for architectural analysis.
@@ -28,11 +28,11 @@ The core of the framework is a comprehensive role-based architecture that positi
 The primary role prompt (see Appendix~\ref{app:role-prompt}) establishes the LLM as a "Senior Domain-Driven Design Specialist \& Architectural Sparring Partner" with over 10 years of enterprise DDD implementation experience. This detailed persona specification serves multiple strategic purposes: it provides contextual grounding for the expected level of architectural sophistication, establishes an interactive rather than passive analytical approach, and creates behavioral expectations for rigorous questioning and assumption challenging.
 
 \subsubsection{Behavioral Guidelines and Context Simulation}
-The role definition includes specific behavioral instructions that guide the LLM's analytical process. It is instructed to enforce DDD best practices, engage in collaborative modeling, and actively challenge vague or ambiguous concepts. This behavioral framework ensures consistency in how the model approaches domain modeling tasks across different requirement sets.
+The role definition includes specific behavioral instructions that guide the LLMs analytical process. It is instructed to enforce DDD best practices, engage in collaborative modeling, and actively challenge vague or ambiguous concepts. This behavioral framework ensures consistency in how the model approaches domain modeling tasks across different requirement sets.
 
 By embedding the LLM within this realistic consulting context—complete with "red flags" that trigger intervention, a communication style based on Socratic questioning, and an emphasis on business value—the prompts activate more sophisticated reasoning patterns. This comprehensive context simulation was highly effective in generating nuanced architectural insights that reflected genuine domain expertise. The role-based architecture proved essential for maintaining consistency across the multi-phase analysis, ensuring each step built upon the established expert persona.
 
-\subsection{Structured Analysis Workflow}
+\subsection{Structured Analysis Workflow}\label{section:workflow}
 
 \begin{figure}[htbp]
     \centering
@@ -124,79 +124,30 @@ Each phase explicitly builds upon the outputs of the previous ones, creating a c
 \subsection{Source Documentation Analysis}
 Requirements for both SecuRooms and SecuMails domains were systematically extracted from FTAPI's existing product documentation. This approach ensured that the LLM analysis would be based on the same foundational information used in the development processes.
 
-\subsection{Requirements Compilation Strategy}
-SecuRooms represents a smaller domain compared to SecuMails, but provides an ideal validation case since it has already been successfully modularized using manual DDD practices. This existing architecture serves as the benchmark against which LLM-generated models can be evaluated. The SecuMails domain requirements represent the primary target for architectural modernization, encompassing the core email functionality that remains in monolithic form.
-
-\subsection{Input Preparation Strategy}
+\subsection{Input Preparation}
 For both domains, all gathered requirements were consolidated into structured text documents optimized for LLM processing. Requirements were formatted as plain text documents, with each domain's requirements organized in a single file ready for direct input into the AI system. This approach enabled seamless progression through the five-phase analysis workflow while allowing the LLM to maintain context across all phases and build progressively more detailed architectural insights
 
 \section{Architecture Generation Process}
-\subsection{LLM-Assisted Domain Model Creation}
-Using the prepared requirements documents, both SecuRooms and SecuMails domains were systematically processed through the established five-phase workflow. The analysis generated comprehensive architectural candidates for each domain, with multiple iterations performed where necessary to refine and clarify the resulting domain models.
+With the prompt engineering framework established and the requirements documents prepared, the core experimental phase of generating the domain model architectures was executed. This process involved systematically applying the structured five-phase workflow to the requirements for both the SecuRooms and SecuMails domains. The objective was to produce comprehensive, LLM-generated architectural candidates that could subsequently be subjected to rigorous expert evaluation.
 
-\subsection{Architecture Candidate Documentation}
-The LLM-generated outputs from each phase were systematically captured and consolidated into structured architectural candidates. These candidates included complete bounded context definitions, aggregate specifications, entity relationships, and technical architecture mappings. For SecuRooms, this process produced architectural proposals that could be directly compared against the existing manually-designed implementation.
+\subsection{Execution of the Five-Phase Workflow}
+For each domain, the corresponding requirements document was provided as the initial context to the LLM, which was configured with the "Senior DDD Specialist" persona. The model was then guided sequentially through the five predefined phases.
 
-\subsection{Output Validation and Refinement}
-Each generated architecture candidate underwent internal validation to ensure completeness and internal consistency. Where ambiguities or gaps were identified in the initial outputs, additional iterations through relevant workflow phases were conducted to achieve satisfactory architectural coverage.
+The output from each phase served as the direct input and context for the subsequent phase. This created a cohesive and traceable analytical progression, ensuring that high-level business concepts identified in the early phases directly informed the concrete structural designs in the later phases.
 
-\section{Expert Evaluation Preparation}
+\subsection{Iterative Refinement and Dialogue}
+The generation process was not treated as a single, fire-and-forget execution but as an interactive dialogue, consistent with the 'architectural sparring partner' persona. After each phase, the LLMs output was reviewed for clarity, consistency, and completeness. Where ambiguities, logical gaps, or superficial analysis were identified, clarifying follow-up prompts were used to challenge and refine the model's output. This iterative loop was repeated until a satisfactory level of detail and coherence was achieved for a given phase before proceeding to the next. This approach ensured the final architecture was the product of a refined, multi-step analysis rather than a single, unverified generation.
 
-\subsection{Interview Design and Structure}
-The expert evaluation was designed around the core research questions. The interview structure incorporated qualitative feedback to capture comprehensive insights.
-
-Given that SecuRooms already has a manually-designed DDD implementation, the interviews were structured to evaluate both domains differently. For SecuRooms, experts could directly compare LLM outputs against the existing proven architecture. For SecuMails, experts assessed the LLM proposals on their own merits as potential modernization strategies.
-
-\subsubsection{Interview Phases and Core Questions}
-\label{sec:interview_phases}
-
-The interview was structured into four parts and the following questions were prepared for the interview to guide throughout
-
-\paragraph{Part 1: Introduction and Goal Alignment (5 minutes)}
-The objective of this phase was to brief the expert on the purpose of the study.
+\subsection{Consolidation of Architectural Candidates}
+Upon completion of the refined five-phase workflow for each domain, the outputs from all phases were systematically captured and consolidated into a single, structured document. Each document represented a comprehensive architectural candidate, including:
 \begin{itemize}
-    \item \textbf{Introduction:} A brief overview of the thesis goal: to evaluate the effectiveness of LLMs in identifying bounded contexts from complex enterprise requirements.
-    \item \textbf{Context:} Explanation of the two cases: SecuRooms as a validation case against a known benchmark, and SecuMails as an exploratory case for a monolithic modernization challenge.
-    \item \textbf{Task:} Clarification that the expert's role is to critique the AI-generated models based on their deep domain knowledge and experience with Domain-Driven Design.
+    \item The final Ubiquitous Language glossary.
+    \item A map of identified domain events, commands, and actors.
+    \item A complete bounded context map with defined responsibilities.
+    \item Detailed aggregate designs for each context.
+    \item High-level technical architecture mappings based on hexagonal principles.
 \end{itemize}
-
-\paragraph{Part 2: Comparative Evaluation of SecuRooms (20 minutes)}
-This part focused on directly comparing the LLM-generated model against the existing, human-designed architecture for SecuRooms.
-
-\begin{itemize}
-    \item \textbf{Qualitative Probing Questions:}
-    \begin{itemize}
-        \item "Does the extracted Ubiquitous language represent the real language used for securooms"
-        \item "Do the extracted events represent all the events what in the Securooms domain happen? Do you mis anything here ?"
-        \item "Did the LLM identify any alternative groupings or potential improvements that we missed during the manual design? Conversely, what critical elements did it completely omit?"
-        \item "Do you think the extracted Aggregates represent the real core aggregates we currently have?"
-    \end{itemize}
-\end{itemize}
-
-\paragraph{Phase 3: Standalone Evaluation of SecuMails (20 minutes)}
-This part was conceptualized to assess the LLM-generated architecture for SecuMails on its own merits as a viable modernization strategy.
-
-\begin{itemize}
-    \item \textbf{Qualitative Probing Questions:}
-    \begin{itemize}
-        \item "Based on your understanding of the SecuMails monolithic challenges, does this AI-proposed architecture represent a plausible and effective path forward? Why or why not?"
-        \item "If you were tasked with modernizing SecuMails, would you consider this LLM output a useful starting point? What would you change, and what would you keep?"
-        \item "Would this proposal be helpful to you as the architect who is tasked with defining a modernized architecture"
-    \end{itemize}
-\end{itemize}
-
-\paragraph{Phase 4: Overall Impressions and Conclusion (10 minutes)}
-This final part should capture the experts' holistic views on the practical implications of this technology.
-
-\begin{itemize}
-    \item \textbf{Discussion Questions:}
-    \begin{itemize}
-        \item "Overall, how would you describe the utility of the LLM as an 'architectural sparring partner' in the domain modeling process?"
-        \item "To what extent could this approach accelerate or improve the quality of architectural design at FTAPI, especially considering constraints like tight deadlines and business pressure?"
-        \item "What are the most significant limitations or risks you foresee in relying on LLMs for these critical design tasks?"
-        \item "Do you have any final recommendations for how this methodology could be improved or applied in the future?"
-    \end{itemize}
-\end{itemize}
+This resulted in two final artifacts: one architectural model for SecuRooms, which could be directly compared against its existing human-designed counterpart, and one for SecuMails, representing a novel modernization proposal. These two candidates formed the basis for the expert evaluation phase.
 
 \subsection{Expert Evaluation Execution}
-Following the prepared design, a series of semi-structured interviews were conducted with 3 experts from FTAPI Software GmbH. The participants included one tech lead and two senior Developers, each with extensive experience in the company's domain and the principles of Domain-Driven Design. The interviews were conducted via video conference, lasted approximately 50min each, and were recorded and transcribed for analysis. The gathered qualitative data was then thematically analyzed to identify recurring patterns, points of consensus, and divergent opinions regarding the LLM-generated architectural models.
+Following the prepared design, a series of semi-structured interviews were conducted with 3 experts from FTAPI Software GmbH. The participants included one tech lead and two senior developers, each with extensive experience in the company's domain and the principles of Domain-Driven Design. The interviews were conducted via video conference, lasted approximately 50 minutes each, and were recorded and transcribed for analysis. The gathered qualitative data was then thematically analyzed to identify recurring patterns, points of consensus, and divergent opinions regarding the LLM-generated architectural models.

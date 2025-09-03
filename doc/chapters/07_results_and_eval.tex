@@ -1,9 +1,9 @@
-\chapter{Results and Evaluation}\label{chapter:results}
+\chapter{Results}\label{chapter:results}
 
-This chapter presents the results and findings from this work in extracting bounded contexts within FTAPI's software ecosystem. Building upon the five-phase workflow established in Chapter 6, we analyze how Large Language Models performed across each stage of the Domain Driven Design process. From establishing a ubiquitous language to proposing technical architecture mappings. The results reveal both the cpapbilities and limitations of current AI models in supporting domain modeling efforts.
+This chapter presents the results and findings from this work in extracting bounded contexts within FTAPI's software ecosystem. Building upon the five-phase workflow established in Chapter 6, we analyze how Large Language Models performed across each stage of the Domain Driven Design process. From establishing a ubiquitous language to proposing technical architecture mappings. The results reveal both the capabilities and limitations of current AI models in supporting domain modeling efforts.
 
 \section{Capturing Ubiquitous Language}
-The LLM's were first tasked to capture the ubiquitous language from a large requirements set. This initial phase formed the foundation for the whole subsequent architecural analysis, as establishing a consistent domain vocabulary is fundamental to the domain driven design process. The models were provided with requirement sets for both Securoom and Secumail domains from FTAPI's product marketing material
+The LLMs were first tasked with capturing the ubiquitous language from a large requirements set. This initial phase formed the foundation for the whole subsequent architectural analysis, as establishing a consistent domain vocabulary is fundamental to the domain driven design process. The models were provided with requirement sets for both SecuRooms and Secumails domains from FTAPI's product marketing material
 
 \subsection{Securooms}
 The SecuRooms requirements, produced remarkably consistent core vocabulary across all three models. The Table \ref{tab:securooms-ubiquitous-language} presents a comparative analysis of key domain terms extracted by each LLM. All models successfully identified the central concept of a "SecuRoom" as a secure container for file collaboration, though their specific definitions revealed subtle differences in understanding. Claude emphasized the optional nature of end-to-end encryption, reflecting the product's flexibility, while Gemini focused on the SecuRoom as the primary workspace and access boundary. GPT provided the most architecturally-oriented definition, explicitly mentioning "security and access boundary" as defining characteristics. Particularly noteworthy was the treatment of "SecuPass," the personal password protecting users' private keys for end-to-end encryption. All models correctly identified its critical security function and irrecoverable nature. Claude and Gemini explicitly noted that without the SecuPass, encrypted content becomes permanently inaccessible—a crucial business invariant that GPT captured more implicitly through the term "personal credential."
@@ -12,8 +12,7 @@ The SecuRooms requirements, produced remarkably consistent core vocabulary acros
     \centering
     \begin{adjustbox}{max width=\textwidth}
     \begin{tabular}{|p{2.5cm}|p{4cm}|p{4cm}|p{4cm}|}
-    \hline
-    \rowcolor{gray!20}
+    \hline@
     \textbf{Term} & \textbf{Claude Opus 4.1} & \textbf{Gemini 2.5 Pro} & \textbf{GPT 5.0} \\
     \hline
     \textbf{SecuRoom} & 
@@ -104,7 +103,7 @@ The event storming simulation for SecuRooms revealed largely consistent event fl
   \begin{adjustbox}{max width=\textwidth}
       \includegraphics[height=7cm]{figures/create-securoom-claude.png} 
   \end{adjustbox}
-  \caption{Create Securoom Claude 4.1 Opus}
+  \caption{Creating a SecuRoom — Claude 4.1 Opus}
   \label{fig:event-create-securoom-claude} 
 \end{figure}
 
@@ -116,7 +115,7 @@ The event storming simulation for SecuRooms revealed largely consistent event fl
     \begin{adjustbox}{max width=\textwidth}
         \includegraphics[height=10cm]{figures/invitaion-new-user-gemini.png} 
     \end{adjustbox}
-    \caption{Invitation of a new user to a Securoom – Gemini 2.5 Pro}
+    \caption{Invitation of a new user to a SecuRoom – Gemini 2.5 Pro}
     \label{fig:event-invite-new-user-gemini} 
 \end{figure}
 
@@ -177,21 +176,21 @@ At one end of the spectrum, models such as Claude (Figure~\ref{fig:secumails-bou
 \begin{figure}[htbp]
   \centering
   \includegraphics[height=8cm]{figures/secumails-bounded-contexts-claude.png} 
-  \caption{Secumails proposed Bounded Contexts - Claude 4.1 Opus}
+  \caption{SecuMails proposed Bounded Contexts - Claude 4.1 Opus}
   \label{fig:secumails-bounded-contexts-claude} 
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[height=5cm]{figures/secumails-bounded-contexts-gemini.png} 
-  \caption{Secumails proposed Bounded Contexts - Gemini 2.5 Pro}
+  \caption{SecuMails proposed Bounded Contexts - Gemini 2.5 Pro}
   \label{fig:secumails-bounded-contexts-gemini} 
 \end{figure}
 
 \begin{figure}[htbp]
   \centering
   \includegraphics[height=10cm]{figures/secumails-bounded-context-chatgpt.png} 
-  \caption{Secumails proposed Bounded Contexts - GPT 5}
+  \caption{SecuMails proposed Bounded Contexts - GPT 5}
   \label{fig:secumails-bounded-contexts-gpt} 
 \end{figure}
 
