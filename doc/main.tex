@@ -1,0 +1,61 @@
+\RequirePackage[l2tabu,orthodox]{nag}
+
+% TODO: decide if one-sided/two-sided
+%\documentclass[headsepline,footsepline,footinclude=false,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc,BCOR=12mm,DIV=12]{scrbook} % two-sided
+\documentclass[headsepline,footsepline,footinclude=false,oneside,fontsize=11pt,paper=a4,listof=totoc,bibliography=totoc]{scrbook} % one-sided
+
+% TODO: change citation style in settings
+\input{settings}
+
+% TODO: change thesis information
+\newcommand*{\getUniversity}{Technische Universität München}
+\newcommand*{\getFaculty}{Department of Informatics}
+\newcommand*{\getTitle}{AI-Assisted Domain Modeling: Enhanced Bounded Context Extraction with LLMs}
+\newcommand*{\getTitleGer}{KI-unterstützte Domänenmodellierung: Verbesserte Extraktion von Bounded Contexts mit LLMs}
+\newcommand*{\getAuthor}{Husein Jusic}
+\newcommand*{\getDoctype}{Bachelor's Thesis in Informatics}
+\newcommand*{\getSupervisor}{Tobias Eisenreich}
+\newcommand*{\getAdvisor}{Michael Krinninger}
+\newcommand*{\getSubmissionDate}{\today}
+\newcommand*{\getSubmissionLocation}{Munich}
+
+\begin{document}
+
+% Set page numbering to avoid "destination with the same identifier has been already used" warning for cover page.
+% (see https://en.wikibooks.org/wiki/LaTeX/Hyperlinks#Problems_with_Links_and_Pages).
+\pagenumbering{alph}
+\input{pages/cover}
+
+\frontmatter{}
+
+\input{pages/title}
+\input{pages/disclaimer}
+\input{pages/acknowledgments}
+\input{pages/abstract}
+\microtypesetup{protrusion=false}
+\tableofcontents{}
+\microtypesetup{protrusion=true}
+
+\mainmatter{}
+
+\input{chapters/01_introduction}
+\input{chapters/02_theoretical_background}
+\input{chapters/03_related_work}
+\input{chapters/04_ftapi}
+\input{chapters/05_methodology}
+\input{chapters/06_implementation}
+\input{chapters/07_results_and_eval}
+\input{chapters/08_discussion}
+% TODO: add more chapters here
+
+\appendix{}
+\input{pages/appendix}
+
+\microtypesetup{protrusion=false}
+\input{pages/aistatement}
+\listoffigures{}
+\listoftables{}
+\microtypesetup{protrusion=true}
+\printbibliography{}
+
+\end{document}

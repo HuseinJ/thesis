@@ -1,0 +1,110 @@
+\chapter{Theoretical Background}\label{chapter:theoreticalbg}
+In this chapter, we introduce the theoretical concepts fundamental to this thesis. We begin with Domain-Driven Design, which provides the architectural framework for our investigation into LLM-assisted bounded context extraction.
+
+\section{Domain Driven Design}\label{sec:ddd}
+Domain Driven Design (DDD) describes a process for software development that was introduced by Eric Evans in his seminal work "Domain-Driven Design: Tackling Complexity in the Heart of Software" \autocite{evans2004domain}. This methodology emphasizes creating software systems that accurately reflect and align with the business domain they serve. DDD is particularly valuable for complex systems with extensive requirements where business logic is continually evolving and changing.
+
+The core philosophy of DDD centers on prioritizing the domain model over technical concerns, enabling software development teams to solve business problems instead of getting entangled in implementation details. This approach typically results in software that is more maintainable and closely aligned with business objectives. Empirical research supports this claim; for example, Özkan et al. \autocite{ddd-maintainability} conducted a case study demonstrating that DDD implementation significantly improved the maintainability metrics of a large-scale commercial software system compared to its previous architecture.
+
+\subsection{Domain}
+Evans provides a foundational definition of the term "domain" in his seminal work:
+\begin{quote}
+"Every software program relates to some activity or interest of its user. That subject area to which the user applies the program is the domain of the software."
+\autocite[p.~4]{evans2004domain}
+\end{quote}
+Furthermore, he makes it clear that the domain represents more than just a subject area; it encompasses the entire business context within which a software system operates. It includes all the business rules, processes, workflows, terminology, and conceptual models that domain experts use when discussing and working within their field of expertise. Vernon \autocite[p.~17]{vernon2013implementing} further clarifies this by explaining that a domain is "a sphere of knowledge and activity around which the application logic revolves."
+
+\subsection{Ubiquitous Language}
+One of the core concepts of DDD is the development of a Ubiquitous Language. A Ubiquitous Language is a shared vocabulary that is consistently used by domain experts and the developers. This shared vocabulary improves communication, mitigates translation errors and improves communication between technical and non-technical stakeholders when discussing the business domain.
+
+Vernon \autocite[p.~22]{vernon2013implementing} provides an example on how Ubiquitous Language directly affects code design. He presents three approaches to modeling a flu vaccination scenario, each reflecting a different level of domain understanding.
+
+His example shown in Table~\ref{tab:ubiquitous-language-examples} demonstrates how the evolution of language directly impacts code structure and domain modeling. The progression from generic, technical language to precise, domain-aligned terminology, illustrates a fundamental principle: the language we use shapes the software we build.
+
+Ubiquitous Language plays a crucial role in identifying and maintaining bounded contexts. Evans \autocite[p.~13]{Evans2003} emphasizes that "the model is the backbone of a language used by all team members", and this language serves as the primary indicator of context boundaries. When the same term carries different meanings or when communication requires translation between team members, these linguistic fractures often reveal the natural boundaries between bounded contexts.
+
+Within a well-defined bounded context, every term has a single, precise meaning that all team members, both technical and domain experts, understand identically. This linguistic consistency prevents the subtle corruption of domain concepts that often occurs when boundaries are unclear. For instance, the term "customer" might mean a person with an active subscription in a billing context, while in a marketing context it could include prospects and past customers. These semantic differences signal the need for separate bounded contexts.
+
+\begin{table}[htbp]
+    \centering
+    \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{|m{5cm}|m{9cm}|}
+    \hline
+    \rowcolor{gray!20}
+    \textbf{Domain Statement} & \textbf{Resulting Code} \\
+    \hline
+    "Who cares? Just code it up." &
+\begin{lstlisting}[aboveskip=10pt, belowskip=0pt]
+patient.setShotType(ShotTypes.TYPE_FLU);
+patient.setDose(dose);
+patient.setNurse(nurse);
+\end{lstlisting} \\
+    \hline
+    "We give flu shots to patients." &
+\begin{lstlisting}[aboveskip=10pt, belowskip=0pt]
+patient.giveFluShot();
+\end{lstlisting} \\
+    \hline
+    "Nurses administer flu vaccines to patients in standard doses." &
+\begin{lstlisting}[aboveskip=10pt, belowskip=0pt]
+Vaccine vaccine = 
+vaccines.standardAdultFluDose();
+nurse.administerFluVaccine(patient, vaccine);
+\end{lstlisting} \\
+    \hline
+    \end{tabular}
+    \end{adjustbox}
+    \caption{Approaches to modeling based on different language interpretations (adapted from Vernon \autocite[p.~22]{vernon2013implementing})}
+    \label{tab:ubiquitous-language-examples}
+\end{table}
+
+\subsubsection{Relevance to LLM-Assisted Domain Modeling}
+This linguistic foundation presents both opportunities and challenges for LLM-assisted bounded context identification. Large Language Models possess the capability to detect semantic variations and linguistic patterns. They can potentially:
+
+\begin{enumerate}
+    \item \textbf{Identify terminology conflicts}: LLMs can analyze requirements documents to detect when the same term is used with different meanings, suggesting potential context boundaries.
+    
+    \item \textbf{Extract domain vocabulary}: By processing stakeholder communications, user stories, and documentation, LLMs can help build a comprehensive glossary of domain terms and their relationships.
+    
+    \item \textbf{Maintain linguistic consistency}: LLMs can assist in ensuring that domain terms are used consistently within a bounded context and flag instances where terminology diverges from established patterns.
+\end{enumerate}
+
+However, the challenge lies in ensuring that LLMs understand the domain-specific nuances rather than applying generic interpretations. The success of LLM-assisted bounded context identification may largely depend on how effectively we can guide these models to recognize and respect the precision that Ubiquitous Language demands. This consideration will be central to our prompt engineering approach and evaluation criteria in the empirical phase of this research.
+
+\subsection{Subdomains and Bounded Contexts}
+Understanding the distinction and relationship between subdomains and bounded contexts is fundamental to Domain-Driven Design and crucial for this thesis, as bounded contexts form the primary unit of modularization in our investigation.
+
+\subsubsection{Defining Subdomains and Bounded Contexts}
+
+A subdomain represents a distinct area of the business domain, corresponding to different aspects of the organization's activities. Evans \autocite{Evans2003} identifies three types of subdomains: the \textit{Core Domain}, which provides competitive advantage; \textit{Supporting Subdomains}, which are necessary but not differentiating; and \textit{Generic Subdomains}, which address common problems faced by many businesses.
+
+In contrast, a bounded context exists in the solution space as the boundary that defines the applicability of a particular domain model \autocite{Evans2003}. It establishes explicit boundaries within which a domain model remains consistent and unified. These boundaries encompass linguistic aspects (consistent ubiquitous language), organizational aspects (team alignment), and technical aspects (code bases, schemas, deployment units).
+
+The relationship between subdomains and bounded contexts is not necessarily one-to-one. While ideally each subdomain maps to a single bounded context, practical constraints often lead to different arrangements where a bounded context might span multiple subdomains or a subdomain might be split across multiple contexts \autocite{Evans2003}.
+
+\subsubsection{The Relationship Between Subdomains and Bounded Contexts}
+While subdomains and bounded contexts often align, Evans \autocite[]{Evans2003} warns against assuming a one-to-one correspondence. In practice, legacy constraints, team structures, and technical limitations influence how subdomain boundaries map to bounded contexts. A single bounded context might encompass multiple subdomains, or a subdomain might span multiple contexts.
+This distinction proves critical for modularization efforts like those at FTAPI: subdomain identification provides business-driven boundaries, while bounded context design translates these into implementable software modules. As Evans notes, "when code based on distinct models is combined, software becomes buggy, unreliable, and difficult to understand" \autocite[p.~271]{Evans2003}— making bounded contexts the fundamental unit for maintaining model integrity during modularization.
+
+\section{Prompt Engineering}
+Prompt engineering has emerged as a critical discipline for optimizing interactions with Large Language Models. As Aqsa et al. \autocite[]{promptAqsa} define it, prompt engineering involves "the strategic arrangement of input queries under prompt engineering methodology [which] leads to enhanced LLM output efficiency and accuracy as well as improved coherence." This field focuses on crafting structured inputs that guide models to produce accurate, contextually relevant, and task-appropriate outputs.
+
+\subsection{Core Techniques and Approaches}
+The effectiveness of prompt engineering relies on several established techniques. Structured prompting involves carefully designed prompts that specify roles, contexts, and constraints. Role-based prompting, for instance, instructs the model to respond from a specific perspective (e.g., "Act as a cybersecurity expert"), which enhances domain-specific precision by aligning responses with expert knowledge patterns \autocite[]{promptAqsa}. Iterative refinement allows continuous improvement of prompts based on previous model outputs, while chain-of-thought prompting guides models through systematic reasoning processes—particularly valuable for complex problem-solving tasks.
+
+\subsection{Emerging Trends and Rapid Evolution}
+The field of prompt engineering is evolving at an unprecedented pace. Recent developments include automated prompt generation using reinforcement learning from human feedback (RLHF), multi-modal prompting that combines text with visual inputs, and collaborative human-AI systems for prompt optimization \autocite[]{promptAqsa}. These advancements are rapidly transforming how practitioners interact with LLMs across various domains.
+
+However, this rapid evolution presents a unique challenge for researchers and practitioners. Traditional academic literature, with its lengthy peer-review cycles, often becomes outdated by the time of publication. The techniques and best practices that were state-of-the-art six months ago may already be superseded by new approaches. This temporal mismatch between the pace of development and academic publishing means that practitioners increasingly rely on alternative sources of information—including technical blogs, preprint servers, open-source repositories, and community forums—to stay current with the latest prompt engineering strategies.
+
+\subsection{Relevance to Domain Modeling}
+For the specific task of bounded context identification, prompt engineering becomes particularly crucial. The quality of prompts directly influences whether an LLM can accurately understand domain-specific terminology, identify linguistic boundaries between contexts, and propose meaningful architectural divisions. Effective prompts must guide the model to:
+
+\begin{itemize}
+    \item Recognize domain-specific vocabulary and its context-dependent meanings
+    \item Identify patterns that suggest natural boundaries between business capabilities
+    \item Maintain consistency with established domain-driven design principles
+    \item Produce outputs that are both technically sound and business-aligned
+\end{itemize}
+
+The challenge lies in developing prompts that can effectively communicate the nuanced requirements of domain modeling while accounting for the model's inherent limitations in understanding implicit domain knowledge. This balance between guidance and flexibility forms a central consideration in our empirical investigation of LLM-assisted bounded context identification.

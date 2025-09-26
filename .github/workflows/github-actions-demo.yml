@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - 'v*'         # only run when pushing a tag like v1.0, v2.3.4
+    paths:
+      - 'doc/**'
+  pull_request:
+    paths:
+      - 'doc/**'
+
+permissions:
+  contents: write  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: texlive/texlive:latest
+
+    steps:
+      - uses: actions/checkout@v4   # use latest version
+
+      - name: Clean and build PDF
+        run: |
+          cd doc
+          make clean || true     # clean if target exists, ignore error otherwise
+          make -B pdf            # force rebuild regardless of timestamps
+
+      - name: Verify PDF exists
+        run: |
+          echo "Checking if PDF exists..."
+          ls -lh doc/build
+          if [ ! -f doc/build/main.pdf ]; then
+            echo "Error: PDF not found at doc/build/main.pdf"
+            exit 1
+          fi
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thesis
+          path: doc/build/main.pdf
+          retention-days: 14
+
+      - name: Upload PDF to Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: doc/build/main.pdf
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
