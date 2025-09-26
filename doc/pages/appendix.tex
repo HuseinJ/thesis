@@ -289,7 +289,7 @@ Show how each technical decision supports the domain model.
     
     ### 3.1.2 Serverseitige Verschlüsselung
     
-    - **Standard**: AES-256 Verschlüsselung
+    - **Standard**: AES-256 GCM Mode Verschlüsselung
     - **Speicherung**: Verschlüsselt auf Server ("Encryption-at-Rest")
     - **Anwendung**: Für alle Datenräume
     
@@ -551,8 +551,7 @@ Show how each technical decision supports the domain model.
     - Benutzerverwaltung via API
     
     ### 5.4.2 Systemintegrationen
-    
-    - **Microsoft Teams Integration**
+
     - **SecuFlows-Schnittstelle**
     - **SSO (Single Sign-On)**
     - **Zwei-Faktor-Authentifizierung (2FA)**
@@ -780,7 +779,7 @@ Show how each technical decision supports the domain model.
     ### 5.1 Verschlüsselung
     
     - **Transportverschlüsselung**: TLS für alle Übertragungen
-    - **Serverseitige Verschlüsselung**: AES-256 für gespeicherte Daten
+    - **Serverseitige Verschlüsselung**: AES-256 GCM Mode für gespeicherte Daten
     - **Ende-zu-Ende-Verschlüsselung**: Optional pro Datenraum aktivierbar
     
     ### 5.2 SecuPass
@@ -962,9 +961,9 @@ Show how each technical decision supports the domain model.
 
 ### **3.1.1 SecuPass-Technologie**
 
-- Hybride Verschlüsselung mit AES-256-Bit
+- Hybride Verschlüsselung mit AES-256-Bit GCM Mode
 - Datenverschlüsselung: Symmetrisches AES-Verfahren
-- Schlüsselaustausch: Asymmetrisches RSA-Schlüsselpaar
+- Schlüsselaustausch: Asymmetrisches RSA OAEP - Schlüsselpaar
 - RSA-Schlüssel mit OAEP (Optimal Asymmetric Encryption Padding)
 - Schlüssellänge: 4096 Bit
 - Automatischer Schlüsselaustausch ohne manuelle Zertifikatseinspielung
@@ -1302,7 +1301,7 @@ FTAPI SecuMails ist eine Lösung für den sicheren Versand und Empfang von Nachr
 
 ### Verschlüsselung
 
-- AES 256-Bit-Verschlüsselung
+- AES GCM Mode 256-Bit-Verschlüsselung
 - Transport-Verschlüsselung via TLS 1.3
 - Ende-zu-Ende-Verschlüsselung nach Zero-Knowledge-Prinzip
 - Verschlüsselung nach BSI-Standards
@@ -1617,7 +1616,7 @@ System MUSS vier verschiedene Sicherheitsstufen anbieten:
 
 ### 5.1 Verschlüsselung
 
-- MUSS AES 256-Bit-Verschlüsselung verwenden
+- MUSS AES GCM Mode 256-Bit-Verschlüsselung verwenden
 - MUSS Zero-Knowledge-Prinzip bei Stufe 3+4 einhalten
 - MUSS Krypto-Agilität für zukünftige Standards unterstützen
 

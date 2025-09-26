@@ -35,5 +35,11 @@ Author: Husein Jusic
 
 Supervisor: Tobias Eisenreich
 
+## Disclaimer
+
+The software requirements, domain models, and related artifacts included in this project were generated using an AI-assisted workflow and edited manually for research purposes. They are based on publicly available information and may not accurately reflect the real-world systems they represent.  
+
+These materials are intended solely for scientific research and demonstration in the context of this thesis. They **should not be used as authoritative or production-ready requirements**, and the authors make no guarantees regarding their correctness, completeness, or applicability.
+
 ## License
 This project is licensed under the [CC BY-NC 4.0 License](https://creativecommons.org/licenses/by-nc/4.0/).
